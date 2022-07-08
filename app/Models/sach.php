@@ -23,6 +23,15 @@ class sach extends Model
     public function nhaxb(){
         return $this->belongsTo(nhaxuatban::class,'manxb','manxb');
     }
+
+    public function chitietsach(){
+        return $this->belongsTo(chitietsach::class,'masach','masach');
+    }
+
+    // public function chitietsach(){
+    //     return $this->hasMany(chitietsach::class,'masach','msach');
+    // }
+
     public function getdataBook(){
         return DB::table('sach')->get();
     }

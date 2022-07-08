@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,5 +17,8 @@ class nhaxuatban extends Model
 
     public function sach(){
         return $this->hasMany(sach::class,'manxb','manxb');
+    }
+    public function getDataNXB(){
+        return DB::table('nhaxuatban')->get();
     }
 }

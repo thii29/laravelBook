@@ -9,44 +9,32 @@ use DB;
 
 class DanhmucController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $danhmuc=danhmuc::getData();
         return view('admin.danhmuc',['danhmuc'=>$danhmuc]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('admin.themdanhmuc');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         //
         $request->validate([
-            'madm'=>'required|unique:danhmuc|max:10',
-            'tendm'=>'required',
+            'madm'=>'required|unique:danhmuc,madm|max:10',
+            'tendm'=>'required|unique:danhmuc,tendm',
         ],
         [
-            'madm.unique'=>'Mã tồn tại!',
-            'madm.required'=>'Mã trống',
-            'tendm.required'=>'Tên trống'
+            'madm.unique'=>'Mã này đã tồn tại!',
+            'madm.required'=>'Mã không được để trống!',
+            'tendm.required'=>'Tên không được để trống!',
+            'tendm.unique'=>'Tên danh mục này đã tồn tại!'
         ]);
         $dm = new danhmuc();
         $dm->madm = $request->madm;
@@ -55,23 +43,13 @@ class DanhmucController extends Controller
         return redirect()->route('admin.danhmuc');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\danhmuc  $danhmuc
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(danhmuc $danhmuc)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\danhmuc  $danhmuc
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($madm)
     {
         //
@@ -79,41 +57,38 @@ class DanhmucController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\danhmuc  $danhmuc
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request)
     {
         //
         $request->validate([
-            'madm'=>'required|unique:danhmuc|max:10',
-            'tendm'=>'required',
+            'madm'=>'required|max:10',
+            'tendm'=>'required|unique:danhmuc,tendm',
         ],
         [
-            'madm.unique'=>'Mã tồn tại!',
-            'madm.required'=>'Mã trống',
-            'tendm.required'=>'Tên trống'
+            'madm.required'=>'Mã không được để trống!',
+            'tendm.required'=>'Tên không được để trống!',
+            'tendm.unique'=>'Tên danh mục này đã tồn tại!'
         ]);
         $danhmuc = danhmuc::find($request->madm);
         $danhmuc->tendm = $request->tendm;
+        $danhmuc->trangthai = $request ->trangthai;
         $danhmuc->save();
         return redirect()->route('admin.danhmuc');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\danhmuc  $danhmuc
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Request $request)
     {
         //
+        $dm=danhmuc::find($request->madm);
+        //dd(count($dm->sach),$request->madm);
+        if(count($dm->sach)!= 0){
+            session()->flash('fail','Danh mục này hiện đang có sách, không thể xoá');
+            return redirect()->route('admin.danhmuc');
+        }
         danhmuc::find($request->madm)->delete();
+        session()->flash('success','Đã xoá thành công!');
         return redirect()->route('admin.danhmuc');
     }
 }

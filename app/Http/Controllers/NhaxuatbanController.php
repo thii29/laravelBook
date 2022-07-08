@@ -14,6 +14,8 @@ class NhaxuatbanController extends Controller
      */
     public function index()
     {
+        $nxb=nhaxuatban::getDataNXB();
+        return view('admin.nhaxuatban',['nxb'=>$nxb]);
     }
 
     /**
@@ -24,6 +26,7 @@ class NhaxuatbanController extends Controller
     public function create()
     {
         //
+        return view('admin.themnxb');
     }
 
     /**
@@ -34,51 +37,65 @@ class NhaxuatbanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //ham luu thong tin duoc them vao
+        $request->validate([
+            'manxb'=>'required|unique:nhaxuatban,manxb|max:15',
+            'tennxb'=>'required|unique:nhaxuatban,tennxb'
+        ],[
+            'manxb.required'=>'Không được để trống mã!',
+            'manxb.unique'=>'Mã này đã tồn tại!',
+            'manxb.max'=>'Mã nhà xuất bản không được vượt quá 15 ký tự!',
+            'tennxb.required'=>'Không được để trống tên!',
+            'tennxb.unique'=>'Tên nhà xuất bản này đã tồn tại!'
+        ]);
+        $nhaxb = new nhaxuatban();
+        $nhaxb->manxb=$request->manxb;
+        $nhaxb->tennxb=$request->tennxb;
+        $nhaxb->save();
+
+        return redirect()->route('admin.nxb');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\nhaxuatban  $nhaxuatban
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(nhaxuatban $nhaxuatban)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\nhaxuatban  $nhaxuatban
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(nhaxuatban $nhaxuatban)
+    public function edit($manxb)
     {
         //
+        return view('admin.suanhaxuatban',['nxb'=>nhaxuatban::find($manxb)]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\nhaxuatban  $nhaxuatban
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, nhaxuatban $nhaxuatban)
+
+    public function update(Request $re)
     {
         //
+        $re->validate([
+            'tennxb'=>'required|unique:nhaxuatban,tennxb'
+        ],[
+            'tennxb.required'=>'Tên không được bỏ trống!',
+            'tennxb.unique'=>'Tên nhà xuất bản không được trùng!'
+        ]);
+        $nxb=nhaxuatban::find($re->manxb);
+        $nxb->tennxb=$re->tennxb;
+        $nxb->save();
+        return redirect()->route('admin.nxb');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\nhaxuatban  $nhaxuatban
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(nhaxuatban $nhaxuatban)
+
+    public function destroy(Request $request)
     {
-        //
+        //xoa
+        $nxb=nhaxuatban::find($request->manxb);
+        if(count($nxb->sach)!=0){
+            session()->flash('fail','Không thể xoá, nhà xuất bản này hiện đang chứa sách');
+            return redirect()->route('admin.nxb');
+        }
+        //dd(count($nxb->sach));
+        nhaxuatban::find($request->manxb)->delete();
+        session()->flash('success','Xoá thành công!');
+        return redirect()->route('admin.nxb');
     }
 }

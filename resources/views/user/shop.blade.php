@@ -27,12 +27,10 @@
                     <form>
                        @foreach ($nxb as $n)
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-all">
-                            <label class="custom-control-label" for="price-all">Nhà xuất bản {{ $n->tennxb }}</label>
+                            <label  for="">Nhà xuất bản {{ $n->tennxb }}</label>
                             <span class="badge border font-weight-normal">{{ count($n->sach) }}</span>
                         </div>
                        @endforeach
-
                     </form>
                 </div>
                 <!-- Price End -->
@@ -41,9 +39,7 @@
                     <h5 class="font-weight-semi-bold mb-4">Tác giả</h5>
                     <form>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-all">
-                            <label class="custom-control-label" for="size-all">All Size</label>
-                            <span class="badge border font-weight-normal">1000</span>
+
                         </div>
                     </form>
                 </div>
@@ -56,17 +52,17 @@
                 <div class="row pb-3">
                     <div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <form action="">
+                            <form action="{{ route('user.shop') }}" method="GET">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Tìm kiếm bằng tên sách">
+                                    <input type="text" name="key" class="form-control" placeholder="Tìm kiếm bằng tên sách">
                                     <div class="input-group-append">
                                         <span class="input-group-text bg-transparent text-primary">
-                                            <i class="fa fa-search"></i>
+                                            <button class="btn btn-sm text-dark"><i class="fa fa-search"></i></button>
                                         </span>
                                     </div>
                                 </div>
                             </form>
-                            <div class="dropdown ml-4">
+                            {{-- <div class="dropdown ml-4">
                                 <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                             Sort by
@@ -76,27 +72,31 @@
                                     <a class="dropdown-item" href="#">Popularity</a>
                                     <a class="dropdown-item" href="#">Best Rating</a>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     @foreach ($sach as $s)
-
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
-                        <div class="card product-item border-0 mb-4">
-                            <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                <img class="img-fluid w-100" src="img/{{ $s->hinhanh }}" alt="">
-                            </div>
-                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                <h6 class="text-truncate mb-3">{{ $s->tensach }}</h6>
-                                <div class="d-flex justify-content-center">
-                                    <h6>{{ number_format($s->gia) }} VND</h6>
+                        <form action="{{ route('user.addgiohang') }}" method="post" enctype="multipart/form-data">
+                           @csrf
+                            <div class="card product-item border-0 mb-4">
+                                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                    <img class="img-fluid w-100" src="img/{{ $s->hinhanh }}" alt="">
+                                    <input type="hidden" name="masach" value="{{ $s->masach }}">
+                                </div>
+                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                    <h6 class="text-truncate mb-3">{{ $s->tensach }}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <h6>{{ number_format($s->gia) }} VND</h6>
+                                    </div>
+                                    <input type="hidden" name="soluong" min="1" value="1">
+                                </div>
+                                <div class="card-footer d-flex justify-content-between bg-light border">
+                                    <a href="{{ url('user/detail') }}/{{ $s->masach }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Chi tiết</a>
+                                    <button class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Thêm vào giỏ</button>
                                 </div>
                             </div>
-                            <div class="card-footer d-flex justify-content-between bg-light border">
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Xem chi tiết</a>
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Thêm vào giỏ</a>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                     @endforeach
 

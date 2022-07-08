@@ -18,4 +18,7 @@ class admin extends Model
     public function getDataAdmin(){
         return DB::table('admin')->get();
     }
+    public function detailAd($email){
+        return admin::where('email',$email)->get();
+    }
 }

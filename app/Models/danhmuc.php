@@ -16,6 +16,9 @@ class danhmuc extends Model
     public $encrementing = false;
     public $timestamps= false;
 
+    public function sach(){
+        return $this->hasMany(sach::class,'madm','madm');
+    }
     public function getData(){
         return DB::table('danhmuc')->get();
     }

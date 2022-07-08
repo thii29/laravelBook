@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
+use App\Models\danhmuc;
 use App\Models\sach;
+use App\Models\nhaxuatban;
+use App\Models\chitietsach;
 use Illuminate\Http\Request;
 
 class SachController extends Controller
@@ -12,9 +15,15 @@ class SachController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        //chititetsach
+        $danhmuc=danhmuc::getData();
+        $nxb=nhaxuatban::getDataNXB();
+        $tg=chitietsach::getChitiet();
+        $detail=sach::where('masach',$id)->get();
+        //dd($detail);
+        return view('user.detail',['danhmuc'=>$danhmuc,'detail'=>$detail,'nxb'=>$nxb,'tg'=>$tg]);
     }
 
     /**
@@ -27,57 +36,31 @@ class SachController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\sach  $sach
-     * @return \Illuminate\Http\Response
-     */
-    public function show(sach $sach)
+
+    public function show()
     {
         //
+        $sach = sach::getdataBook();
+        return view('admin.sach',['sach'=>$sach]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\sach  $sach
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(sach $sach)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\sach  $sach
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, sach $sach)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\sach  $sach
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(sach $sach)
     {
         //

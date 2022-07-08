@@ -51,9 +51,20 @@
                             <label for="note">* Ghi chú:</label>
                             {{-- cái phần dưới này để hiển thị validate hoặc lỗi: vd như trùng mã, trùng tên, --}}
                             {{-- chưa điền mã hoặc tên,... --}}
+                            <p>1 là trạng thái được hiển thị và được sử dụng</p>
+                            <p>0 là trạng thái không được hiển thị và không được sử dụng</p>
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                @endforeach
+                                </ul>
+                            </div>
+                            @endif
                         </div>
                         <div style="height: 100vh"></div>
                     </div>
                 </main>
-               @endsection
+ @endsection
 

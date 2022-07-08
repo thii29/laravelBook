@@ -7,20 +7,23 @@
                         <div class="card mb-4">
                             <div class="card-body">
                                 <table class="table table-light">
-                                    <tbody>
+                                    <tbody >
                                         <tr>
                                             <td>Mã danh mục</td>
                                             <td>Tên danh mục</td>
-                                            <td>Thao tác</td>
+                                            <td align="center">Trạng thái</td>
+                                            <td colspan="2" align="center">Thao tác</td>
                                         </tr>
                                     </tbody>
                                     {{-- Thêm code hiển thị ở đây --}}
                                     <tbody>
                                         @foreach ($danhmuc as $dm)
                                         <tr>
-                                            <td>{{$dm->madm}}</td>
-                                            <td>{{$dm->tendm}}</td>
-                                            <td><a href="{{route('admin.formsuadm',$dm->madm)}}">Sửa</a> |
+                                            <td>{{ $dm->madm }}</td>
+                                            <td>{{ $dm->tendm }}</td>
+                                            <td align="center">{{ $dm->trangthai }}</td>
+                                            <td align="right"><a href="{{route('admin.formsuadm',$dm->madm)}}">Sửa</a></td>
+                                            <td align="left">
                                                 <form action="{{route('admin.xoadm')}}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="madm" value="{{$dm->madm}}">
@@ -34,6 +37,20 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="card-body">
+                            @if(session()->has('fail'))
+                            <div class="alert alert-danger">
+                                {{ session('fail') }}
+                            </div>
+                            @endif
+                            @if (session()->has('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            @endif
+
+                        </div>
+
                         <div style="height: 100vh"></div>
                     </div>
                 </main>

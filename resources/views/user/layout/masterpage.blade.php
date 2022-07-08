@@ -23,33 +23,29 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('user/css/style.css') }}" rel="stylesheet">
     <!--Bootstrap-->
+    <livewire:styles />
+
+    @livewireStyles
 </head>
 
 <body>
+    @livewireScripts
+    <livewire:scripts>
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a href="" class="text-decoration-none">
+                <a href="/" class="text-decoration-none">
                     <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">BOOK</span>STORE</h1>
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Nhập tên sách cần tìm">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
-                        </div>
-                    </div>
-                </form>
+
             </div>
             <div class="col-lg-3 col-6 text-right">
-                <a href="" class="btn border">
+                <a href="{{ route('user.giohang') }}" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
+                    <span class="badge">{{ Cart::getcontent()->count() }}</span>
                 </a>
             </div>
         </div>
@@ -68,7 +64,9 @@
                 <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden">
                         @foreach ($danhmuc as $dm)
+                        @if ($dm->trangthai == 1)
                             <a href="" class="nav-item nav-link">{{ $dm->tendm }}</a>
+                        @endif
                         @endforeach
                     </div>
 
@@ -89,8 +87,24 @@
                             <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
-                            <a href="" class="nav-item nav-link">Đăng nhập</a>
-                            <a href="" class="nav-item nav-link">Đăng ký</a>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fas fa-user fa-fw"></i> &nbsp;
+                                    @if(session()->has('login'))
+                                    Xin chào, {{ session('login')['hoten'] }}
+                                    @endif
+                                </button>
+                                <div class="dropdown-menu">
+                                  @if (session()->has('login'))
+                                  <a class="dropdown-item" href="{{ url('user/inform') }}/{{ session('login')['email']  }}">Thông tin cá nhân</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item" href="{{ route('user.logout') }}">Đăng xuất</a>
+                                  @else
+                                  <a class="dropdown-item" href="{{ route('user.loginform') }}">Đăng nhập </a>
+                                  <a class="dropdown-item" href="{{ route('user.formreg') }}">Đăng ký </a>
+                                  @endif
+                                </div>
+                              </div>
                         </div>
                     </div>
                 </nav>
@@ -121,7 +135,7 @@
                     <div class="d-flex flex-column justify-content-start">
                         <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
                         <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Đăng nhập</a>
-                        <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Dăng ký</a>
+                        <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Đăng ký</a>
                         <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                         <a class="text-dark mb-2" href="checkout.html"><i class="fa fa-angle-right mr-2"></i>Giỏ hàng</a>
                     </div>

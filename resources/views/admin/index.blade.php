@@ -16,8 +16,8 @@
                                             <td>Mã Admin</td>
                                             <td>Họ tên</td>
                                             <td>Email</td>
-                                            <td>Phân quyền</td>
-                                            <td colspan="2" align="center">Thao tác</td>
+                                            <td align="center">Phân quyền</td>
+                                            <td>Thao tác</td>
                                         </tr>
                                     </tbody>
                                     @foreach ($admin as $a)
@@ -25,11 +25,17 @@
                                             <td>{{ $a->maadmin }}</td>
                                             <td>{{ $a->hoten }}</td>
                                             <td>{{ $a->email }}</td>
-                                            <td>{{ $a->phanquyen }}</td>
-                                            <td>
-                                                <a href="">Chỉnh sửa</a>
-                                            </td>
-                                            <td><a href="">Vô hiệu hoá</a></td>
+                                            <td align="center">{{ $a->phanquyen }}</td>
+                                            @if (session()->has('dangnhap'))
+                                                @if(session('dangnhap')['email']==$a->email)
+                                                <td>
+                                                    
+                                                    <a href="">Chỉnh sửa</a>
+                                                </td>
+                                                @else
+                                                <td><a href="" onclick="return confirm('Không có quyền hạn!')">Chỉnh sửa</a></td>
+                                                @endif
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </table>

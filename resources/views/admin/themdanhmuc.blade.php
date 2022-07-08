@@ -29,11 +29,20 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <label for="note">* Ghi chú:</label>
+                            {{-- <label for="note">* Ghi chú:</label> --}}
                             {{-- cái phần dưới này để hiển thị validate hoặc lỗi: vd như trùng mã, trùng tên, --}}
                             {{-- chưa điền mã hoặc tên,... --}}
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                @endforeach
+                                </ul>
+                            </div>
+                            @endif
                         </div>
-                        <div style="height: 100vh"></div>
+                        <div style="height: 100pt"></div>
                     </div>
                 </main>
                @endsection

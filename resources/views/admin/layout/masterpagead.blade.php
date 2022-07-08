@@ -27,12 +27,24 @@
             <!-- Navbar-->
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="{{ route('admin.loginform') }}"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user fa-fw"></i>
+                    @if (session()->has('dangnhap'))
+                    {{ session('dangnhap')['hoten'] }}
+                    @endif
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        @if (session()->has('dangnhap'))
+                        <li>
+                            <a class="dropdown-item" href="{{ url('admin/informad') }}/{{ session('dangnhap')['email'] }}">Thông tin admin</a>
+                        </li>
+                        @else
+                        <li><a class="dropdown-item" href="{{ route('admin.loginform') }}">Đăng nhập</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.formreg') }}">Đăng ký</a></li>
+                        @endif
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.logout') }}">Đăng xuất</a></li>
                     </ul>
                 </li>
             </ul>
@@ -64,7 +76,7 @@
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">Bảng sách</a>
+                                    <a class="nav-link" href="{{ route('admin.sach') }}">Bảng sách</a>
                                     <a class="nav-link" href="#">Thêm sách</a>
                                 </nav>
                             </div>
@@ -75,8 +87,8 @@
                             </a>
                             <div class="collapse" id="collapseNXB" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">Danh sách NXB</a>
-                                    <a class="nav-link" href="#">Thêm nhà xuất bản</a>
+                                    <a class="nav-link" href="{{ route('admin.nxb') }}">Danh sách NXB</a>
+                                    <a class="nav-link" href="{{ route('admin.formthemnxb') }}">Thêm nhà xuất bản</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAuthor" aria-expanded="false" aria-controls="collapsePages">
@@ -86,8 +98,8 @@
                             </a>
                             <div class="collapse" id="collapseAuthor" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">Bảng tác giả</a>
-                                    <a class="nav-link" href="#">Thêm tác giả</a>
+                                    <a class="nav-link" href="{{ route('admin.tg') }}">Danh sách tác giả</a>
+                                    <a class="nav-link" href="{{ route('admin.formthemtg') }}">Thêm tác giả</a>
                                 </nav>
                             </div>
                             <a class="nav-link" href="charts.html">
@@ -105,7 +117,11 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
+                        <div class="small">Logged in as:
+                        @if (session()->has('dangnhap'))
+                        {{ session('dangnhap')['hoten'] }}
+                        @endif
+                        </div>
                     </div>
                 </nav>
             </div>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Models\admin;
 use Illuminate\Http\Request;
 
@@ -18,69 +18,84 @@ class AdminController extends Controller
         return view('admin.index',['admin'=>$admin]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function showlogin(){
+        return view('admin.login');
+    }
+    public function checklogin(Request $re){
+        $re->validate([
+            'email'=>'required',
+            'password'=>'required|min:6|max:50',
+        ],[
+            'email.required'=>'Email sai hoặc để trống!',
+            'password.required'=>'Password bỏ trống!',
+            'password.min'=>'Mật khẩu không được nhỏ hơn 6 ký tự!',
+            'password.max'=>'Mật khẩu không được vượt quá 50 ký tự!',
+        ]);
+        //dd($re->all());
+        $a=admin::where('email',$re->email)->first();
+        //dd($a);
+        if(!$a){
+            session()->flash('mess','Email này không tồn tại!');
+            return redirect()->route('admin.loginform');
+        }
+        if($re->password==$a->password){
+            session()->put('dangnhap',
+                            ['email'=>$a->email,
+                            'hoten'=>$a->hoten,
+                            'maadmin'=>$a->maadmin]);
+            return redirect()->route('admin.showindex');
+        }else{
+            session()->flash('mess'.'Sai mat khau!');
+            return redirect()->route('admin.loginform');
+        }
+
+    }
+    public function logout(){
+        session()->forget('dangnhap');
+        return redirect()->route('admin.loginform');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function showReg(){
+        return view('admin.register');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function show(admin $admin)
-    {
-        //
+    public function register(Request $request){
+        $request->validate([
+            'email'=>'unique:admin,email',
+            'password'=>'min:6|max:50',
+        ],[
+            'email.unique'=>'Email này đã tồn tại!',
+            'password.min'=>'Password tối thiểu 8 ký tự',
+            'password.max'=>'Password tối đa 50 ký tự',
+        ]);
+        $a = [
+            'hoten'=> $request->hoten,
+            'email'=> $request->email,
+            'password'=>$request->password,
+        ];
+        //dd($a);
+        return redirect()->route('admin.loginform')->with(['admin'=>admin::insert($a)]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(admin $admin)
-    {
-        //
+    public function show($email){
+        //dd($email);
+        $admin = admin::detailAd($email);
+        return view('admin.informad',['admin'=>$admin]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, admin $admin)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\admin  $admin
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(admin $admin)
-    {
-        //
+    public function editinfor(Request $re){
+        // $re->validate([
+        //     'email'=>'unique:admin,email',
+        //     'password'=>'min:6',
+        // ],[
+        //     'email.unique'=>'Email này đã tồn tại!',
+        //     'password.min'=>'Password phải lớn hơn 6 ký tự',
+        // ]);
+        $admin = admin::find($re->maadmin);
+        $admin->hoten = $re->hoten;
+        $admin->email = $re->email;
+        $admin->password = $re->password;
+        $admin->phanquyen = $re->phanquyen;
+        //dd($admin);
+        $admin->save();
+        return redirect()->route('admin.showindex');
     }
 }
