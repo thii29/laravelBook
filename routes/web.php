@@ -89,3 +89,5 @@ Route::group(['prefix'=>'user'],function(){
     // Route::get('decre/{id}','GiohangController@decreaseItem');
     Route::get('coupon','KhuyenmaiController@find')->name('user.coupon');
 });
+
+Route::put('add-cart' , "GiohangController@updateQtyProductCart")->name('add.qty.product');

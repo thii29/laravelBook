@@ -1,7 +1,7 @@
 @extends('user.layout.masterpage')
 @section('content')
-</div>
-</div>
+    </div>
+    </div>
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
@@ -32,38 +32,41 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
-                        @foreach (Cart::getcontent() as $item)
-                        <tr>
-                            <td class="align-middle">{{ $item->id }}</td>
-                            <td align="center"><img src="img/{{ $item->attributes['image'] }}" style="width: 60px;"> <br> &nbsp; <h6>{{ $item->name }}</h6></td>
-                            <td class="align-middle">{{ number_format($item->price) }} VND</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <input type="hidden" name="id" value="{{ $item->id }}">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" wire:click.prevent="decreaseItem('{{ $item->id}}')">
-                                        <i class="fa fa-minus"></i>
-                                        </button>
+                        @foreach ($carts as $item)
+                            <tr>
+                                <td class="align-middle">{{ $item->id }}</td>
+                                <td align="center"><img src="img/{{ $item->attributes['image'] ??'' }}" style="width: 60px;">
+                                    <br> &nbsp; <h6>{{ $item->name }}</h6>
+                                </td>
+                                <td class="align-middle">{{ $item->price }} VND</td>
+                                <td class="align-middle">
+                                    <div class="input-group item-quantity mx-auto" style="width: 100px;"
+                                        data-id="{{ $item->id }}">
+                                        {{-- <input type="hidden" name="id" value="{{ $item->id }}"> --}}
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-minus" >
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" name="quantity" value="{{ $item->qty }}" min="0"
+                                            class="form-control form-control-sm bg-secondary text-center">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <input type="text" name="quantity" value="{{ $item->quantity }}"
-                                    class="form-control form-control-sm bg-secondary text-center">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus" wire:click.prevent="increaseItem('{{ $item->id }}')">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">{{ number_format($item->price*$item->quantity) }} VND</td>
-                            <td class="align-middle">
-                                <form action="{{ route('user.removecart') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="id" value="{{ $item->id }}">
-                                    <button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button>
-                                </form>
-                            </td>
-                        </tr>
+                                </td>
+                                <td class="align-middle item-total"><span>{{  $item->price * $item->qty }}</span> VND</td>
+                                <td class="align-middle">
+                                    <form action="{{ route('user.removecart') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="id" value="{{ $item->id }}">
+                                        <button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -84,7 +87,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3 pt-1">
                             <h6 class="font-weight-medium">Tổng: </h6>
-                            <h6 class="font-weight-medium">{{ number_format(Cart::getTotal()) }} VND</h6>
+                            <h6 class="font-weight-medium"><span id="total-cart">{{ Cart::subtotal(2, ',', '.') }}</span> VND</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Giảm giá: </h6>
@@ -104,5 +107,60 @@
         </div>
     </div>
     <!-- Cart End -->
+@endsection
 
+
+@section('js')
+    <script>
+        $(document).on('click', '.btn-minus', function(event) {
+            let _this = this;
+            let product_id = $(_this).closest('.item-quantity').attr('data-id');
+            let qty = $(_this).closest('.item-quantity').find('input[name="quantity"]').val();
+            qty = parseInt(qty) - 1;
+            if(qty == 0) {
+                if(!confirm("Bạn có chắc muốn xóa")){
+                    return;
+                }
+            }
+            changeQuantityProductCart(_this, product_id, qty);
+        });
+
+        $(document).on('click', '.btn-plus', function(event) {
+            event.preventDefault();
+            let _this = this;
+            let product_id = $(_this).closest('.item-quantity').attr('data-id');
+            let qty = $(_this).closest('.item-quantity').find('input[name="quantity"]').val();
+
+            changeQuantityProductCart(_this, product_id, parseInt(qty)+1);
+        });
+
+        function changeQuantityProductCart(_this, id, qty) {
+            let url_add = '{{ route('add.qty.product') }}';
+            $.ajax({
+                url: url_add,
+                type: 'PUT',
+                dataType: 'JSON',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id : id,
+                    qty : qty
+                }
+            }).done(function(response) {
+                if(response.productCart.length == 0){
+                    $(_this).closest('tr').remove();
+                }
+                $(_this).closest('.item-quantity').find('input[name="quantity"]').val(response.productCart.qty)
+                $(_this).closest('tr').find('.item-total span').html((parseFloat(response.productCart.price) * parseInt(response.productCart.qty)).toFixed(2))
+                $("#total-cart").html(response.total);
+                $("#count-qty-cart").html(response.count_qty);
+            }).fail(function(err) {
+                let mess = JSON.parse(err.responseText);
+                if(mess.text) alert(mess.text);
+            });
+        }
+
+        $(document).on('click', '.btn-plus', function(event) {
+
+        });
+    </script>
 @endsection
