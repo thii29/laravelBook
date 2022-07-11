@@ -35,14 +35,13 @@
                         @foreach ($carts as $item)
                             <tr>
                                 <td class="align-middle">{{ $item->id }}</td>
-                                <td align="center"><img src="img/{{ $item->attributes['image'] ??'' }}" style="width: 60px;">
+                                <td align="center"><img src="img/{{  $item->options['image'] }}" style="width: 60px;" alt="Hình ảnh">
                                     <br> &nbsp; <h6>{{ $item->name }}</h6>
                                 </td>
-                                <td class="align-middle">{{ $item->price }} VND</td>
+                                <td class="align-middle">{{ number_format($item->price) }} VND</td>
                                 <td class="align-middle">
                                     <div class="input-group item-quantity mx-auto" style="width: 100px;"
                                         data-id="{{ $item->id }}">
-                                        {{-- <input type="hidden" name="id" value="{{ $item->id }}"> --}}
                                         <div class="input-group-btn">
                                             <button class="btn btn-sm btn-primary btn-minus" >
                                                 <i class="fa fa-minus"></i>
@@ -57,7 +56,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="align-middle item-total"><span>{{  $item->price * $item->qty }}</span> VND</td>
+                                <td class="align-middle item-total"><span>{{  number_format($item->price * $item->qty) }}</span> VND</td>
                                 <td class="align-middle">
                                     <form action="{{ route('user.removecart') }}" method="post">
                                         @csrf
@@ -72,35 +71,39 @@
                 </table>
             </div>
             <div class="col-lg-4">
-                <form class="mb-5" action="{{ route('user.coupon') }}" method="get">
-                    <div class="input-group">
-                        <input type="text" class="form-control p-4" placeholder="Mã giảm giá" name="makm">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary">Nhập mã</button>
-                        </div>
-                    </div>
-                </form>
+
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
                         <h4 class="font-weight-semi-bold m-0">Tổng đơn hàng</h4>
                     </div>
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <div class="d-flex justify-content-between mb-3 pt-1">
                             <h6 class="font-weight-medium">Tổng: </h6>
-                            <h6 class="font-weight-medium"><span id="total-cart">{{ Cart::subtotal(2, ',', '.') }}</span> VND</h6>
+                            <h6 class="font-weight-medium"><span id="total-cart">{{ Cart::subtotal(0, '.') }}</span> VND</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Giảm giá: </h6>
+
                             <h6 class="font-weight-medium">%</h6>
 
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="card-footer border-secondary bg-transparent">
+                        <form action="{{ route('user.checkout') }}" method="post">
+                            @csrf
                         <div class="d-flex justify-content-between mt-2">
-                            <h5 class="font-weight-bold">Tổng cộng: </h5>
-                            <h5 class="font-weight-bold"> money</h5>
+                            <h5 class="font-weight-bold">Tổng tiền: </h5>
+                            <h5 class="font-weight-bold"> {{ Cart::subtotal(0, '.') }} VND</h5>
+                        </div>
+                        <div class="card-footer border-secondary bg-transparent">
+                            <div class="d-flex justify-content-between mt-2">
+                               <label class="font-weight-bold">Nhập mã:</label> 
+                                <input type="text" name="makm" id="" placeholder="Mã giảm giá" class="form-control p-4 ">
+                            </div>
+
                         </div>
                         <button class="btn btn-block btn-primary my-3 py-3">Thanh toán</button>
+                        </form>
                     </div>
                 </div>
             </div>

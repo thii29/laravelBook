@@ -21,7 +21,5 @@ class khuyenmai extends Model
     public function getDataKhuyenMai(){
         return DB::table('khuyenmai')->get();
     }
-    public function getMa($makm){
-        return khuyenmai::where('makm',$makm)->get();
-    }
+    
 }

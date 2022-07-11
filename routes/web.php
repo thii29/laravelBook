@@ -85,9 +85,8 @@ Route::group(['prefix'=>'user'],function(){
     Route::get('giohang','GiohangController@index')->name('user.giohang');
     Route::post('add','GiohangController@add')->name('user.addgiohang');
     Route::delete('remove','GiohangController@remove')->name('user.removecart');
-    // Route::get('incre/{id}','GiohangController@increaseItem');
-    // Route::get('decre/{id}','GiohangController@decreaseItem');
-    Route::get('coupon','KhuyenmaiController@find')->name('user.coupon');
+    //checkout
+    Route::post('checkout','DonhangController@index')->name('user.checkout');
 });
 
 Route::put('add-cart' , "GiohangController@updateQtyProductCart")->name('add.qty.product');

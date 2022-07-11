@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\danhmuc;
 use App\Models\sach;
 use Cart;
-use Darryldecode\Cart\Cart as CartCart;
 
-// use Livewire\Component;
 use Illuminate\Http\Request;
 
-// use Darryldecode\Cart\Cart as CartCart;
 use Session;
 
 class GiohangController extends Controller
@@ -44,19 +41,17 @@ class GiohangController extends Controller
     public function add(Request $re)
     {
         $sach = sach::find($re->masach);
-
-        // if ($this->checkQtyCartAndQtyProduct($id, $qty)) { // kiểm tra số lượng
+        // if ($this->checkQtyCartAndQtyProduct($sach->masach, $sach->soluongkho)) { // kiểm tra số lượng
         //    return redirect()->route('user.giohang')->with('notification', 'Số lượng không đủ bán');
         // }
-
         Cart::add([
-            'id' => 456,
-            'name' => 'Sample Item 1',
-            'price' => 100,
-            'qty' => 1,
+            'id' =>$sach->masach,
+            'name' => $sach->tensach,
+            'price' => $sach->gia,
+            'qty' => $re->soluong,
             'weight' => 0,
             'options' => [
-                'image' => 'image',
+                'image' => $sach->hinhanh,
             ]
         ]);
         return redirect()->route('user.giohang');
@@ -73,17 +68,19 @@ class GiohangController extends Controller
             Cart::remove($cartItem->first()->rowId);
         }
 
-        if (Cart::count() == 0) { // nếu giỏ hàng không tồn tại sp thì xóa giỏ hàng luôn @@@
+        if (Cart::count() == 0) {
+            // nếu giỏ hàng không tồn tại sp thì xóa giỏ hàng luôn @@@
             Cart::destroy();
         }
 
         return redirect()->route('user.giohang')->with("notification" , "Xóa thành công");
     }
 
-    private function checkQtyCartAndQtyProduct($id, $qty) // kiểm tra số lượng mua và số lượng sản phẩm còn
+    private function checkQtyCartAndQtyProduct($id, $qty)
     {
+        // kiểm tra số lượng mua và số lượng sản phẩm còn
         $product = sach::where('id', $id)->first();
-        if (!empty($product) && $product->stock < $qty) {
+        if (!empty($product) && $product->quantity < $qty) {
             return true;
         } else {
             return false;

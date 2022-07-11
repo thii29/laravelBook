@@ -81,7 +81,7 @@
                            @csrf
                             <div class="card product-item border-0 mb-4">
                                 <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                    <img class="img-fluid w-100" src="img/{{ $s->hinhanh }}" alt="">
+                                    <img class="img-fluid w-100" src="img/{{ $s->hinhanh }}" alt="" name="hinhanh">
                                     <input type="hidden" name="masach" value="{{ $s->masach }}">
                                 </div>
                                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
@@ -89,7 +89,7 @@
                                     <div class="d-flex justify-content-center">
                                         <h6>{{ number_format($s->gia) }} VND</h6>
                                     </div>
-                                    <input type="hidden" name="soluong" min="1" value="1">
+                                    <input type="hidden" name="soluong" min="1" max="{{ $s->soluongkho }}" value="1" >
                                 </div>
                                 <div class="card-footer d-flex justify-content-between bg-light border">
                                     <a href="{{ url('user/detail') }}/{{ $s->masach }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Chi tiết</a>
