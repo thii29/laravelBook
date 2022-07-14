@@ -48,8 +48,8 @@ class KhachhangController extends Controller
         }
         if($re->password==$u->password){
             session()->put('login',['email'=>$u->email,
-                                    'hoten'=>$u->hoten,
-                                        'makh'=>$u->makh]);
+                                    'hoten'=>$u->hoten,'makh'=>$u->makh,
+                                    'diachi'=>$u->diachi,'sdt'=>$u->sdt]);
             return redirect("/");
         }else{
             session()->flash('fail','Sai mật khẩu!');

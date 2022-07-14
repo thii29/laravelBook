@@ -79,7 +79,7 @@ class GiohangController extends Controller
     private function checkQtyCartAndQtyProduct($id, $qty)
     {
         // kiểm tra số lượng mua và số lượng sản phẩm còn
-        $product = sach::where('id', $id)->first();
+        $product = sach::where('masach', $id)->first();
         if (!empty($product) && $product->quantity < $qty) {
             return true;
         } else {

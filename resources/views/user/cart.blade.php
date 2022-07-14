@@ -93,16 +93,20 @@
                             @csrf
                         <div class="d-flex justify-content-between mt-2">
                             <h5 class="font-weight-bold">Tổng tiền: </h5>
-                            <h5 class="font-weight-bold"> {{ Cart::subtotal(0, '.') }} VND</h5>
+                            <h5 class="font-weight-bold"> {{ Cart::subtotal(0,',') }} VND</h5>
                         </div>
                         <div class="card-footer border-secondary bg-transparent">
                             <div class="d-flex justify-content-between mt-2">
-                               <label class="font-weight-bold">Nhập mã:</label> 
+                               <label class="font-weight-bold">Nhập mã:</label>
                                 <input type="text" name="makm" id="" placeholder="Mã giảm giá" class="form-control p-4 ">
                             </div>
 
                         </div>
+                        @if (session()->has('login'))
                         <button class="btn btn-block btn-primary my-3 py-3">Thanh toán</button>
+                        @else
+                        <a name="" id="" class="btn btn-block btn-primary my-3 py-3" href="{{ route('user.loginform') }}" role="button">Đăng nhập để thanh toán</a>
+                        @endif
                         </form>
                     </div>
                 </div>

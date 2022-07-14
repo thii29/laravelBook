@@ -87,6 +87,7 @@ Route::group(['prefix'=>'user'],function(){
     Route::delete('remove','GiohangController@remove')->name('user.removecart');
     //checkout
     Route::post('checkout','DonhangController@index')->name('user.checkout');
+    Route::post('dathang','DonhangController@store')->name('user.dathang');
 });
 
 Route::put('add-cart' , "GiohangController@updateQtyProductCart")->name('add.qty.product');

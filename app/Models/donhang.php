@@ -16,6 +16,9 @@ class donhang extends Model
     public $encrementing = false;
     public $timestamps= false;
 
+    public function chitietdonhang(){
+        return $this->hasOne(chitietdonhang::class,'mahoadon','mahoadon');
+    }
     public function khuyenmai(){
         return $this->belongsTo(khuyenmai::class,'makm','makm');
     }

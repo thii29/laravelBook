@@ -37,7 +37,8 @@
                             <p class="help-block text-danger"></p>
                         </div>
                         <div>
-                           <input type="submit" value="Đăng nhập" class="btn btn-primary py-2 px-4">
+                           <input type="submit" value="Đăng nhập" class="btn btn-primary py-2 px-4"> &nbsp; &nbsp;
+                           <a href="{{ route('user.formreg') }}" class="text-decoration-none">Chưa có tài khoản? Đăng ký</a>
                         </div>
                     </form>
                 </div>

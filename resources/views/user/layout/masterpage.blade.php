@@ -24,12 +24,14 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('user/css/style.css') }}" rel="stylesheet">
     <!--Bootstrap-->
-    {{-- <livewire:styles />
-
-    @livewireStyles
-
-    @livewireScripts
-    <livewire:scripts> --}}
+    <style>
+        .hidden-1{
+            display: none;
+        }
+        .open{
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -60,7 +62,7 @@
 <!-- Navbar Start -->
 <div class="container-fluid">
     <div class="row border-top px-xl-5">
-        <div class="col-lg-3 d-none d-lg-block">
+        <div class="col-lg-3 d-none d-lg-block category">
             <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
                data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
                 <h6 class="m-0">Danh mục</h6>
@@ -69,14 +71,25 @@
             <nav
                 class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
                 id="navbar-vertical">
-                <div class="navbar-nav w-100 overflow-hidden">
+                <div class="navbar-nav w-100 overflow-hidden hidden-1 danhmuclist">
                     @foreach ($danhmuc as $dm)
                         @if ($dm->trangthai == 1)
                             <a href="" class="nav-item nav-link">{{ $dm->tendm }}</a>
                         @endif
                     @endforeach
                 </div>
-
+                <script>
+                    var categoryElement = document.querySelector('.category');
+                    //console.log(categoryElement);
+                    categoryElement.onclick=function(){
+                        var x = document.querySelector('.danhmuclist');
+                        if (x.style.display === "none") {
+                          x.style.display = "block";
+                        } else {
+                          x.style.display = "none";
+                        }
+                    }
+                </script>
             </nav>
         </div>
         <div class="col-lg-9">
@@ -217,6 +230,7 @@
             @endif
 
 @yield('js')
+
 </body>
 
 </html>
