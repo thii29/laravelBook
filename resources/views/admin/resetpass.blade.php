@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Đăng nhập</title>
+        <title>Admin - Tạo mật khẩu mới</title>
         <link href="{{ asset('admin/css/styles.css') }}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
@@ -18,41 +18,31 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Đăng nhập</h3></div>
-                                        @if(session()->has('mess'))
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Mật khẩu mới</h3></div>
+                                    <div class="card-body">
+                                        @if(session()->has('message'))
                                         <div class="alert alert-danger">
-                                            {{ session('mess') }}
+                                            {{ session('message') }}
                                         </div>
                                         @endif
-                                    @if ($errors->any())
-                                        <div class="alert alert-danger">
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endif
-                                    <div class="card-body">
-                                        <form action="{{ route('admin.check') }}" enctype="multipart/form-data" method="post">
+                                        <form action="" method="post">
                                             @csrf
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" name="email" required/>
-                                                <label for="inputEmail">Email</label>
+                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@email.com" />
+                                                <label for="inputEmail">Emai: </label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" name="password"/>
-                                                <label for="inputPassword">Mật khẩu</label>
+                                                <input class="form-control" id="inputPass" type="password" placeholder="name@email.com" />
+                                                <label for="inputPass">Password: </label>
                                             </div>
-
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="{{ route('admin.password') }}">Quên mật khẩu?</a>
-                                                <button class="btn btn-primary">Đăng nhập</button>
+                                                <a class="small" href="{{ route('admin.loginform') }}">Quay lại đăng nhập</a>
+                                                <button class="btn btn-primary">Nhập</button>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="{{ route('admin.formreg') }}">Chưa có tài khoản? Đăng ký!</a></div>
+                                        <div class="small"><a href="{{ route('admin.formreg') }}">Chưa có tài khoản? Đăng ký</a></div>
                                     </div>
                                 </div>
                             </div>

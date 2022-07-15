@@ -35,6 +35,8 @@ Route::group(['prefix'=>'admin'],function(){
     //thong tin admin
     Route::get('informad/{email}','AdminController@show')->name('admin.inform');
     Route::put('editinfor','AdminController@editinfor')->name('admin.editinform');
+    //password
+    Route::get('pass','AdminController@password')->name('admin.password');
     //danhmuc
     Route::get('danhmuc','DanhmucController@index')->name('admin.danhmuc');
     Route::get('formthem','DanhmucController@create')->name('admin.formthem');
@@ -90,9 +92,7 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('dathang','DonhangController@store')->name('user.dathang');
     //lienlac
     Route::get('contact','KhachhangController@contact')->name('user.contact');
-    //guimail
-    Route::get('sendmail','MailContronller@sendmail')->name('user.sendmail');
-    Route::post('sendmail','MailContronller@sendmail')->name('user.sendamil');
+
 });
 
 Route::put('add-cart' , "GiohangController@updateQtyProductCart")->name('add.qty.product');

@@ -98,4 +98,7 @@ class AdminController extends Controller
         $admin->save();
         return redirect()->route('admin.showindex');
     }
+    public function password(){
+        return view('admin.password');
+    }
 }

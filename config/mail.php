@@ -37,8 +37,8 @@ return [
         'smtp' => [
             'transport' => 'smtp',
             'host' => 'smtp.gmail.com',/*env('MAIL_HOST', 'smtp.mailgun.org')*/
-            'port' => 465,/*env('MAIL_PORT', 587)*/
-            'encryption' => 'ssl',/*env('MAIL_ENCRYPTION', 'tls')*/
+            'port' => 587,/*env('MAIL_PORT', 587)*/
+            'encryption' => env('MAIL_ENCRYPTION', ''),/*env('MAIL_ENCRYPTION', 'tls')*/
             'username' => 'thiphamlaravel@gmail.com',/*env('MAIL_USERNAME')*/
             'password' => 'Abc@123456',/*env('MAIL_PASSWORD')*/
             'timeout' => null,
