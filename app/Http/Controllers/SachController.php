@@ -22,8 +22,10 @@ class SachController extends Controller
         $nxb=nhaxuatban::getDataNXB();
         $tg=chitietsach::getChitiet();
         $detail=sach::where('masach',$id)->get();
+        $sach=sach::getdataBook();
         //dd($detail);
-        return view('user.detail',['danhmuc'=>$danhmuc,'detail'=>$detail,'nxb'=>$nxb,'tg'=>$tg]);
+        return view('user.detail',
+        ['danhmuc'=>$danhmuc,'detail'=>$detail,'nxb'=>$nxb,'tg'=>$tg,'sach'=>$sach]);
     }
 
     /**

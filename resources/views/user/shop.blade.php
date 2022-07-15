@@ -76,6 +76,7 @@
                         </div>
                     </div>
                     @foreach ($sach as $s)
+                    @if($s->trangthai==1)
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                         <form action="{{ route('user.addgiohang') }}" method="post" enctype="multipart/form-data">
                            @csrf
@@ -98,6 +99,8 @@
                             </div>
                         </form>
                     </div>
+
+                    @endif
                     @endforeach
 
                     <div class="col-12 pb-1">

@@ -88,6 +88,11 @@ Route::group(['prefix'=>'user'],function(){
     //checkout
     Route::post('checkout','DonhangController@index')->name('user.checkout');
     Route::post('dathang','DonhangController@store')->name('user.dathang');
+    //lienlac
+    Route::get('contact','KhachhangController@contact')->name('user.contact');
+    //guimail
+    Route::get('sendmail','MailContronller@sendmail')->name('user.sendmail');
+    Route::post('sendmail','MailContronller@sendmail')->name('user.sendamil');
 });
 
 Route::put('add-cart' , "GiohangController@updateQtyProductCart")->name('add.qty.product');

@@ -93,9 +93,9 @@ class KhachhangController extends Controller
     }
 
 
-    public function edit(khachhang $khachhang)
-    {
-        //
+    public function contact(){
+        $danhmuc=danhmuc::getData();
+        return view('user.contact', compact('danhmuc'));
     }
 
 

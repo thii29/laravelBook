@@ -51,7 +51,7 @@
         <div class="col-lg-3 col-6 text-right">
             <a href="{{ route('user.giohang') }}" class="btn border">
                 <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge"><span id="count-qty-cart">{{ $count_qty ?? 0 }}</span></span>
+                <span class="badge"><span id="count-qty-cart">{{ Cart::count() }}</span></span>
             </a>
         </div>
     </div>
@@ -105,7 +105,7 @@
                     <div class="navbar-nav mr-auto py-0">
                         <a href="/" class="nav-item nav-link active">Trang chủ</a>
                         <a href="{{ route('user.shop') }}" class="nav-item nav-link">Danh mục</a>
-                        <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
+                        <a href="{{ route('user.contact') }}" class="nav-item nav-link">Liên hệ</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
                         <div class="dropdown">
@@ -171,15 +171,16 @@
                                             class="fa fa-angle-right mr-2"></i>Giỏ hàng</a>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-5">
+                            {{-- <div class="col-md-4 mb-5">
                                 <h5 class="font-weight-bold text-dark mb-4">Hỗ trợ</h5>
-                                <form action="">
+                                <form action="{{ route('user.sendamil') }}" method="post">
+                                    @csrf
                                     <div class="form-group">
-                                        <input type="text" class="form-control border-0 py-4" placeholder="Your Name"
+                                        <input type="text" name="hoten" class="form-control border-0 py-4" placeholder="Your Name"
                                                required="required"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
+                                        <input type="email" name="email" class="form-control border-0 py-4" placeholder="Your Email"
                                                required="required"/>
                                     </div>
                                     <div>
@@ -187,7 +188,7 @@
                                         </button>
                                     </div>
                                 </form>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
