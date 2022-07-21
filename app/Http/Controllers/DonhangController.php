@@ -5,7 +5,6 @@ use Cart;
 use DB;
 use App\Models\donhang;
 use App\Models\chitietdonhang;
-use App\Models\chitietsach;
 use App\Models\danhmuc;
 use App\Models\khuyenmai;
 use Illuminate\Http\Request;
@@ -65,27 +64,43 @@ class DonhangController extends Controller
             chitietdonhang::insert($chitiet);
         }
         //dd($donhang, $chitiet);
-        
+
         Cart::destroy();
         return view('user.thanku');
     }
 
 
-    public function show(donhang $donhang)
+    public function show()
     {
         //
+        $donhang = DB::table('donhang')->get();
+        return view('admin.donhang',compact('donhang'));
     }
 
 
-    public function edit(donhang $donhang)
+    public function edit($madh)
     {
         //
+        $dh = donhang::where('mahoadon',$madh)->get();
+        $ctdh = chitietdonhang::where('mahoadon',$madh)->get();
+        return view('admin.chitietdh',compact('dh','ctdh'));
     }
 
 
-    public function update(Request $request, donhang $donhang)
+    public function update(Request $request)
     {
-        //
+        $dh = donhang::find($request->madh);
+        $dh->makh=$request->makh;
+        $dh->hotenkh=$request->hotenkh;
+        $dh->ngaytao=$request->ngaytao;
+        $dh->sdt=$request->sdt;
+        $dh->diachi=$request->diachi;
+        $dh->makm=$request->makm;
+        $dh->tongtien=$request->tongtien;
+        $dh->ghichu=$request->ghichu;
+        $dh->trangthai = $request->trangthai;
+        $dh->update();
+        return redirect()->route('admin.dsdonhang');
     }
 
 

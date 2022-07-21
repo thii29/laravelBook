@@ -31,7 +31,7 @@
                                 <td><img src="../user/img/{{ $s->hinhanh }}" alt="" style="width: 50px"></td>
                                 <td align="center">{{ $s->soluongkho }}</td>
                                 <td>
-                                    Xoá | Sửa
+                                    Sửa
                                 </td>
                             </tr>
 

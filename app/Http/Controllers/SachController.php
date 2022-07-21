@@ -6,6 +6,7 @@ use App\Models\danhmuc;
 use App\Models\sach;
 use App\Models\nhaxuatban;
 use App\Models\chitietsach;
+use App\Models\tacgia;
 use Illuminate\Http\Request;
 
 class SachController extends Controller
@@ -36,12 +37,19 @@ class SachController extends Controller
     public function create()
     {
         //
+        $danhmuc=danhmuc::getData();
+        $nxb=nhaxuatban::getDataNXB();
+        $tacgia=tacgia::getDataTG();
+        return view('admin.themsach', compact('danhmuc','nxb','tacgia'));
     }
 
 
     public function store(Request $request)
     {
         //
+        $request->validate([
+
+        ],[]);
     }
 
 
@@ -53,9 +61,10 @@ class SachController extends Controller
     }
 
 
-    public function edit(sach $sach)
+    public function edit()
     {
         //
+
     }
 
     public function update(Request $request, sach $sach)

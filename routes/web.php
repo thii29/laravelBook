@@ -66,6 +66,11 @@ Route::group(['prefix'=>'admin'],function(){
     Route::delete('xoatg','TacgiaController@destroy')->name('admin.xoatg');
     //Sach
     Route::get('sach','SachController@show')->name('admin.sach');
+    Route::get('formthemsach','SachController@create')->name('admin.formthemsach');
+    //donhang
+    Route::get('dsdonhang','DonhangController@show')->name('admin.dsdonhang');
+    Route::get('chitietdh/{madh}','DonhangController@edit')->name('admin.chitietdh');
+    Route::put('duyetdon','DonhangController@update')->name('admin.duyet');
 });
 
 //khach hang

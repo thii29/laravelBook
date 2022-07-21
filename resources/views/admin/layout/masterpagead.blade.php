@@ -77,7 +77,7 @@
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ route('admin.sach') }}">Bảng sách</a>
-                                    <a class="nav-link" href="#">Thêm sách</a>
+                                    <a class="nav-link" href="{{ route('admin.formthemsach') }}">Thêm sách</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseNXB" aria-expanded="false" aria-controls="collapsePages">
@@ -102,7 +102,7 @@
                                     <a class="nav-link" href="{{ route('admin.formthemtg') }}">Thêm tác giả</a>
                                 </nav>
                             </div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="{{ route('admin.dsdonhang') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Đơn hàng
                             </a>

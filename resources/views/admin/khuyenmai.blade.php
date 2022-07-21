@@ -48,6 +48,22 @@
                             </div>
                             @endif
                         </div>
+                        <div>
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="card-body">
+                            <label for="">* Ghi chú: </label>
+                            <p>1 là trạng thái được hiển thị và được sử dụng</p>
+                            <p>0 là trạng thái không được hiển thị và không được sử dụng</p>
+                        </div>
                         <div class="card-header">
                             <i class="fa fa-address-book" aria-hidden="true"></i> Thêm mã mới
                         </div>
@@ -87,22 +103,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div>
-                            @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                @endforeach
-                                </ul>
-                            </div>
-                            @endif
-                        </div>
-                        <div class="card-body">
-                            <label for="">* Ghi chú: </label>
-                            <p>1 là trạng thái được hiển thị và được sử dụng</p>
-                            <p>0 là trạng thái không được hiển thị và không được sử dụng</p>
-                        </div>
+
                     </div>
                 </main>
 @endsection

@@ -10,7 +10,7 @@ class donhang extends Model
     use HasFactory;
     protected $table = 'donhang';
     protected $primaryKey='mahoadon';
-    protected $keyType='string';
+    protected $keyType='int';
     protected $fillable =['mahoadon','makh','ngaytao','hotenkh','sdt','diachi','diachi','makm',
                             'tongtien','ghichu','trangthai'];
     public $encrementing = false;
