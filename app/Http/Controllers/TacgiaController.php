@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\tacgia;
+use App\Models\chitietsach;
 use Illuminate\Http\Request;
 
 class TacgiaController extends Controller
@@ -79,6 +80,12 @@ class TacgiaController extends Controller
     public function destroy(Request $request)
     {
         //xoa tac gia
+        $cttg = chitietsach::where('matg',$request->matg)->first();
+        $tg = tacgia::where('matg',$request->matg)->first();
+        if($cttg->matg == $tg->matg){
+            session()->flash('fail','Không thể xoá tác giả đang có tác phẩm');
+            return redirect()->route('admin.tg');
+        }
         tacgia::find($request->matg)->delete();
         session()->flash('success','Xoá thành công');
         return redirect()->route('admin.tg');

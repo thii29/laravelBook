@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class chitietsach extends Model
 {
     use HasFactory;
-    protected $table ="chitietsach";
+    protected $table ='chitietsach';
     protected $fillable=['matg','masach','tentg','tensach'];
+    protected $keyType = 'string';
     public $encrementing = false;
     public $timestamps= false;
 

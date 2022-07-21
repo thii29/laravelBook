@@ -67,6 +67,7 @@ Route::group(['prefix'=>'admin'],function(){
     //Sach
     Route::get('sach','SachController@show')->name('admin.sach');
     Route::get('formthemsach','SachController@create')->name('admin.formthemsach');
+    Route::post('themsach','SachController@store')->name('admin.themsach');
     //donhang
     Route::get('dsdonhang','DonhangController@show')->name('admin.dsdonhang');
     Route::get('chitietdh/{madh}','DonhangController@edit')->name('admin.chitietdh');

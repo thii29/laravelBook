@@ -16,7 +16,7 @@ class tacgia extends Model
     public $encrementing = false;
     public $timestamps= false;
 
-    public function chitiet(){
+    public function chitietsach(){
         return $this->hasMany(chitietsach::class,'matg','matg');
     }
     public function getDataTG(){

@@ -48,8 +48,49 @@ class SachController extends Controller
     {
         //
         $request->validate([
+            'masach'=>'required|unique:sach,masach|max:15',
+            'tensach'=>'required|unique:sach,tensach',
 
-        ],[]);
+            'matg'=>'required',
+            'tentg'=>'required',
+            'hinhanh'=>'mimes:jpg,jpeg,png,gif'
+        ],[
+            'masach.required'=>'Mã sách không được để trống',
+            'masach.unique'=>'Mã sách đã tồn tại',
+            'masach.max'=>'Mã sách không được vượt quá 15 ký tự',
+            'tensach,required'=>'Tên sách không được để trống',
+            'tensach.unique'=>'Tên sách đã tồn tại',
+            'matg.required'=>'Mã tác giả không được để trống',
+            'tentg.required'=>'Tên tác giả không được để trống',
+            'hinhanh.mimes'=>'Hình ảnh phải có đuôi .jpg, .jpeg, .png, .gif'
+        ]);
+        $nameimg = $request->file('hinhanh')->getClientOriginalName();
+        $request->hinhanh->move(public_path('user/img'),$nameimg);
+        $data = [
+            'masach'=>$request->masach,
+            'tensach'=>$request->tensach,
+            'madm'=>$request->madm,
+            'manxb'=>$request->manxb,
+            'soluongkho'=>$request->soluongkho,
+            'sotrang'=>$request->sotrang,
+            'kichthuoc'=>$request->kichthuoc,
+            'loaibia'=>$request->loaibia,
+            'gioithieusach'=>$request->gioithieu,
+            'banchay'=>$request->banchay,
+            'gia'=>$request->gia,
+            'trangthai'=>$request->trangthai,
+            'hinhanh'=> $nameimg,
+        ];
+        $detaildata = [
+            'matg'=>$request->matg,
+            'tentg'=>$request->tentg,
+            'masach'=>$request->masach,
+            'tensach'=>$request->tensach,
+        ];
+        //dd($data);
+        sach::create($data);
+        chitietsach::create($detaildata);
+        return redirect()->route('admin.sach');
     }
 
 

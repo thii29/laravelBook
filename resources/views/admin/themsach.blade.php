@@ -18,16 +18,16 @@
 
                         <div class="card mb-4">
                             <div class="card-body">
-                                <form action="" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('admin.themsach') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label for="inputMasach">Mã sách: </label>
-                                            <input class="form-control" id="inputMasach" type="text" name="masach" placeholder="Mã danh mục" />
+                                            <input class="form-control" id="inputMasach" type="text" name="masach"  />
                                         </div>
                                         <div class="col-md-6">
                                            <label for="inputTensach">Tên sách:</label>
-                                           <input class="form-control" id="inputTensach" type="text" name="tensach" placeholder="Tên danh mục" />
+                                           <input class="form-control" id="inputTensach" type="text" name="tensach"  />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -35,7 +35,7 @@
                                             <label for="inputMadm">Mã danh mục:</label>
                                             <select name="madm" id="inputMadm" class="form-control" >
                                                 @foreach ($danhmuc as $d)
-                                                <option value="">
+                                                <option value="{{ $d->madm }}">
                                                     {{ $d->madm }}
                                                 </option>
                                                 @endforeach
@@ -45,7 +45,7 @@
                                             <label for="inputManxb">Mã nhà xuất bản:</label>
                                             <select name="manxb" id="inputManxb"  class="form-control">
                                                 @foreach ($nxb as $n)
-                                                <option value="">
+                                                <option value="{{ $n->manxb }}">
                                                     {{ $n->manxb }}
                                                 </option>
                                                 @endforeach
@@ -89,43 +89,33 @@
                                         <div class="col-md-4">
                                             <label for="">Bán chạy: </label>
                                             <select name="banchay" id="" class="form-control">
-                                                <option value="">0</option>
-                                                <option value="">1</option>
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
                                             </select>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="">Trạng thái: </label>
                                             <select name="trangthai" id=""class="form-control">
-                                                <option value="">0</option>
-                                                <option value="">1</option>
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
                                             </select>
                                         </div>
                                     </div>
                                     <hr>
-                                    <h5 class="mt-4"><i>Tác giả sách: </i></h5>
+                                    <h5 class="mt-4"><i>Thuộc tác giả: </i></h5>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <lable>Mã tác giả: </lable>
+                                            <input type="text" name="matg" id="" class="form-control">
                                         </div>
                                         <div class="col-md-6">
                                             <lable>Tên tác giả: </lable>
+                                            <input type="text" name="tentg" id="" class="form-control">
                                         </div>
                                     </div>
+                                    <br>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <select name="matg" id="" class="form-control">
-                                                @foreach ($tacgia as $tg)
-                                                <option value="{{ $tg->matg }}">{{ $tg->matg }}</option>
-                                                @endforeach
-                                             </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <select name="tentg" id="" class="form-control">
-                                                @foreach ($tacgia as $tg)
-                                                    <option value="{{ $tg->matg }}">{{ $tg->tentg }}</option>
-                                               @endforeach
-                                            </select>
-                                        </div>
+                                        <div class="col-md-12"><a href="{{ route('admin.tg') }}" target="_blank">Xem danh sách tác giả tại đây</a></div>
                                     </div>
                                     <div class="mt-4 mb-0">
                                         <div class="d-grid"><button type="submit" class="btn btn-primary btn-block" >Thêm sách mới</button></div>
