@@ -106,7 +106,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Đơn hàng
                             </a>
-                            <a class="nav-link" href="{{ URL::to('admin/dskh') }}">
+                            <a class="nav-link" href="{{ route('admin.dskh') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Khách Hàng
                             </a>
