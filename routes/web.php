@@ -68,10 +68,13 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('sach','SachController@show')->name('admin.sach');
     Route::get('formthemsach','SachController@create')->name('admin.formthemsach');
     Route::post('themsach','SachController@store')->name('admin.themsach');
+    Route::get('formsuasach/{$masach}','SachController@edit')->name('admin.formsuasach');
     //donhang
     Route::get('dsdonhang','DonhangController@show')->name('admin.dsdonhang');
     Route::get('chitietdh/{madh}','DonhangController@edit')->name('admin.chitietdh');
     Route::put('duyetdon','DonhangController@update')->name('admin.duyet');
+    //khachhang
+    Route::get('dskh','KhachhangController@listKhachhang')->name('admin.dskh');
 });
 
 //khach hang

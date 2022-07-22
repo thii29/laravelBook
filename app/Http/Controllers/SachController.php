@@ -25,8 +25,8 @@ class SachController extends Controller
         $detail=sach::where('masach',$id)->get();
         $sach=sach::getdataBook();
         //dd($detail);
-        return view('user.detail',
-        ['danhmuc'=>$danhmuc,'detail'=>$detail,'nxb'=>$nxb,'tg'=>$tg,'sach'=>$sach]);
+        return view('user.detail',['danhmuc'=>$danhmuc,
+                                  'detail'=>$detail,'nxb'=>$nxb,'tg'=>$tg,'sach'=>$sach]);
     }
 
     /**
@@ -98,14 +98,14 @@ class SachController extends Controller
     {
         //
         $sach = sach::getdataBook();
-        return view('admin.sach',['sach'=>$sach]);
+        return view('admin.sach',compact('sach'));
     }
 
 
-    public function edit()
+    public function edit(sach $masach)
     {
-        //
-
+        $book=sach::where('masach',$masach)->get();
+        dd($book);
     }
 
     public function update(Request $request, sach $sach)
@@ -116,5 +116,6 @@ class SachController extends Controller
     public function destroy(sach $sach)
     {
         //
+
     }
 }

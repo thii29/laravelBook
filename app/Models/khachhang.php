@@ -15,6 +15,9 @@ class khachhang extends Model
     public $encrementing = false;
     public $timestamps= false;
 
+    public function khachhang(){
+        return DB::table('khachhang')->get();
+    }
     public function detailKhach($email){
         return khachhang::where('email',$email)->get();
     }

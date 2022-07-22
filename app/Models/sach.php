@@ -12,7 +12,8 @@ class sach extends Model
     protected $primaryKey = 'masach';
     protected $keyType = 'string';
     protected $fillable = ['masach','tensach','madm','manxb','hinhanh','soluongkho',
-                           'sotrang','kichthuoc','loaibia','gioithieusach','gia','banchay','trangthai'];
+                           'sotrang','kichthuoc','loaibia','gioithieusach','gia',
+                           'banchay','trangthai'];
     public $encrementing = false;
     public $timestamps= false;
 
