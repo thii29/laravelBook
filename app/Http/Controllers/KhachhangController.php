@@ -102,6 +102,7 @@ class KhachhangController extends Controller
         $kh = khachhang::khachhang();
         return view('admin.danhsachkhachhang',compact('kh'));
     }
+    
     public function update(Request $request, khachhang $khachhang)
     {
         //

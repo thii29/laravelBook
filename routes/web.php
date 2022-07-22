@@ -5,6 +5,7 @@ use App\Http\Controllers;
 use App\Models\danhmuc;
 use App\Models\khuyenmai;
 use App\Models\sach;
+use Illuminate\Routing\Route as RoutingRoute;
 
 /*
 |--------------------------------------------------------------------------
