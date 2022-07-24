@@ -98,11 +98,11 @@ class KhachhangController extends Controller
         return view('user.contact', compact('danhmuc'));
     }
 
-    public function listKhachhang(){
+    public function listKhachHang(){
         $kh = khachhang::khachhang();
         return view('admin.danhsachkhachhang',compact('kh'));
     }
-    
+
     public function update(Request $request, khachhang $khachhang)
     {
         //

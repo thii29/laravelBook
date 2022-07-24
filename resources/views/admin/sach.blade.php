@@ -16,6 +16,21 @@
                 </div>
                 @endif
             </div>
+            <!-- Navbar Search-->
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <form action="{{ route('admin.sach') }}" method="GET">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="keyword" placeholder="Nhập tên sách cần tìm..." />
+                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Navbar-->
+            <br>
             <div class="card mb-4">
                 <div class="card-body">
                     <table class="table table-light"

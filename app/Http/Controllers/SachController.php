@@ -97,7 +97,10 @@ class SachController extends Controller
     public function show()
     {
         //
-        $sach = sach::getdataBook();
+        $sach = sach::all();
+        if($keyword = request()->keyword){
+            $sach=sach::where('tensach','like','%'.$keyword.'%')->paginate(5);
+        }
         return view('admin.sach',compact('sach'));
     }
 

@@ -33,7 +33,7 @@
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <label for="">Email: </label>
-                            <input class="form-control" type="email" name="email" value="{{ $ad->email }}">
+                            <input class="form-control" type="email" name="email" value="{{ $ad->email }}" readonly>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -51,8 +51,14 @@
                             </script>
                         </div>
                         <div class="col-md-6">
+                            @if ($ad->phanquyen==1)
+                                <label for="">Phân quyền: </label>
+                                <input type="number"  class="form-control" name="phanquyen" id="" value="{{ $ad->phanquyen }}" min="0" max="1">
+                            @else
                             <label for="">Phân quyền: </label>
-                           <input type="number"  class="form-control" name="phanquyen" id="" value="{{ $ad->phanquyen }}" min="0" max="1">
+                            <input type="number"  class="form-control" name="phanquyen" id="" value="{{ $ad->phanquyen }}" min="0" max="1" readonly>
+                            @endif
+
                         </div>
 
                     </div>

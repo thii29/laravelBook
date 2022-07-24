@@ -81,6 +81,10 @@ class AdminController extends Controller
         $admin = admin::detailAd($email);
         return view('admin.informad',['admin'=>$admin]);
     }
+    public function show_ID($id){
+        $admin = admin::where('maadmin',$id)->get();
+        return view('admin.informad',compact('admin'));
+    }
     public function editinfor(Request $re){
         // $re->validate([
         //     'email'=>'unique:admin,email',

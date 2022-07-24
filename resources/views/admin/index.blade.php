@@ -26,16 +26,9 @@
                                             <td>{{ $a->hoten }}</td>
                                             <td>{{ $a->email }}</td>
                                             <td align="center">{{ $a->phanquyen }}</td>
-                                            @if (session()->has('dangnhap'))
-                                                @if(session('dangnhap')['email']==$a->email)
-                                                <td>
-                                                    
-                                                    <a href="">Chỉnh sửa</a>
-                                                </td>
-                                                @else
-                                                <td><a href="" onclick="return confirm('Không có quyền hạn!')">Chỉnh sửa</a></td>
-                                                @endif
-                                            @endif
+                                            <td>
+                                                <a href="{{ url('admin/inforID') }}/{{ $a->maadmin }}">Chỉnh sửa</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </table>

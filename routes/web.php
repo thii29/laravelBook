@@ -36,6 +36,7 @@ Route::group(['prefix'=>'admin'],function(){
     //thong tin admin
     Route::get('informad/{email}','AdminController@show')->name('admin.inform');
     Route::put('editinfor','AdminController@editinfor')->name('admin.editinform');
+    Route::get('inforID','AdminController@show_ID')->name('admin.inforID');
     //password
     Route::get('pass','AdminController@password')->name('admin.password');
     //danhmuc
@@ -74,9 +75,10 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('dsdonhang','DonhangController@show')->name('admin.dsdonhang');
     Route::get('chitietdh/{madh}','DonhangController@edit')->name('admin.chitietdh');
     Route::put('duyetdon','DonhangController@update')->name('admin.duyet');
-    //khachhang
-    Route::get('dskh','KhachhangController@listKhachhang')->name('admin.dskh');
+    //khachhang - của admin
+    Route::get('dskh','KhachhangController@listKhachHang')->name('admin.dskh');
 });
+
 
 //khach hang
 Route::group(['prefix'=>'user'],function(){
