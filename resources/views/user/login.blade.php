@@ -45,6 +45,11 @@
             </div>
 
             <div class="col-md-4">
+                @if(session()->has('noti'))
+                <div class="alert alert-success">
+                    {{ session('noti') }}
+                </div>
+                @endif
                 @if(session()->has('fail'))
                 <div class="alert alert-danger">
                     {{ session('fail') }}

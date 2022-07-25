@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('user/assets/css/grid.css') }}">
     <link rel="stylesheet" href="{{ asset('user/assets/css/main.css') }}">
-    <title>Document</title>
+    <title>Thông tin cá nhân-{{ session('login')["hoten"] }}</title>
 </head>
 <body>
     <div class="container">
@@ -24,14 +24,17 @@
                         <div class="row form__infor">
                             <div class="col l-12">
                                 @foreach ($kh as $k)
-                               <form action="" class="form__user">
+                               <form action="{{ route('user.editinfor') }}" class="form__user" method="POST">
+                                @csrf
                                     <div class="name">
                                         <p class="name__text">Họ tên </p>
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <input type="hidden" name="makh" value="{{ $k->makh }}">
                                         <input type="text" name="hoten" id="" class="login__input-text" value="{{ $k->hoten }}">
                                     </div>
                                     <div class="email">
                                         <p class="email__add">Email </p>
-                                        <input type="email" name="email" id="" class="login__input-text" value="{{ $k->email }}">
+                                        <input type="email" name="email" id="" class="login__input-text" value="{{ $k->email }}" readonly>
                                     </div>
                                     <div class="phone">
                                         <p class="phone__change">Số điện thoại</p>
@@ -46,14 +49,13 @@
                                         <input type="password" name="password" id="password" class="login__input-text" value="{{ $k->password }}">
                                         &nbsp;
                                         &nbsp;
-
                                         <i class="fas fa-eye" onclick="showHide()"></i>
                                     </div>
                                     <div class="date">
                                         <p class="name-shop__text">Danh sách đơn hàng đã mua: </p>
-                                        <a href=""class="phone__link"> Xem</a>
+                                        <a href="{{route('user.history',$k->makh) }}" class="phone__link">Xem</a>
                                     </div>
-                                    <button type="submit" class="link__save btn btn-primary" >Lưu</button>
+                                    <button type="submit" class="link__save btn btn-primary" >Sửa</button>
                                </form>
                                @endforeach
                             </div>

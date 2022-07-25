@@ -4,6 +4,19 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Danh mục</h1>
+                        <div class="card-body">
+                            @if(session()->has('fail'))
+                            <div class="alert alert-danger">
+                                {{ session('fail') }}
+                            </div>
+                            @endif
+                            @if (session()->has('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            @endif
+
+                        </div>
                         <div class="card mb-4">
                             <div class="card-body">
                                 <table class="table table-light">
@@ -37,19 +50,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="card-body">
-                            @if(session()->has('fail'))
-                            <div class="alert alert-danger">
-                                {{ session('fail') }}
-                            </div>
-                            @endif
-                            @if (session()->has('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                            @endif
 
-                        </div>
 
                         <div style="height: 100vh"></div>
                     </div>

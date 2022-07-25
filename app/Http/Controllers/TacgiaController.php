@@ -59,7 +59,6 @@ class TacgiaController extends Controller
         //
     }
 
-
     public function update(Request $request )
     {
         //luu thong tin chinh sua

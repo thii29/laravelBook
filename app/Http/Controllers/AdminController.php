@@ -39,10 +39,11 @@ class AdminController extends Controller
             return redirect()->route('admin.loginform');
         }
         if($re->password==$a->password){
-            session()->put('dangnhap',
-                            ['email'=>$a->email,
-                            'hoten'=>$a->hoten,
-                            'maadmin'=>$a->maadmin]);
+            session()->put('dangnhap', ["email"=>$a->email,
+                            "hoten"=>$a->hoten,
+                            "maadmin"=>$a->maadmin,
+                            "phanquyen"=>$a->phanquyen,]);
+            //dd(session('dangnhap'));
             return redirect()->route('admin.showindex');
         }else{
             session()->flash('mess'.'Sai mat khau!');
@@ -78,12 +79,18 @@ class AdminController extends Controller
     }
     public function show($email){
         //dd($email);
+
         $admin = admin::detailAd($email);
         return view('admin.informad',['admin'=>$admin]);
     }
-    public function show_ID($id){
-        $admin = admin::where('maadmin',$id)->get();
-        return view('admin.informad',compact('admin'));
+    // admin kt và chỉnh sửa tk của admin khác
+    public function show_ID(admin $id){
+        if (session('dangnhap')["phanquyen"] == 0) {
+            return redirect()->back()->with('error','Không có quyền hạn truy cập!');
+        }
+        $admin = admin::find($id);
+        //dd($admin);
+        return view('admin.qladmin',['admin'=>$admin]);
     }
     public function editinfor(Request $re){
         // $re->validate([

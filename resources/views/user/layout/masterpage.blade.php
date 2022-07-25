@@ -118,8 +118,7 @@
                             <div class="dropdown-menu">
                                 @if (session()->has('login'))
                                     <a class="dropdown-item"
-                                       href="{{ url('user/inform') }}/{{ session('login')['email']  }}">Thông tin cá
-                                        nhân</a>
+                                       href="{{ route('user.infor',session('login')['email'])  }}">Thông tin cá nhân</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('user.logout') }}">Đăng xuất</a>
                                 @else

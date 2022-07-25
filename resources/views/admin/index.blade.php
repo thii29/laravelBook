@@ -4,6 +4,16 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Quản lý</h1>
+                        @if (session()->has('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+                        <div class="card-body">
+                            <label for=""><i>* Ghi chú:</i></label>
+                            <p>0: là nhân viên kiểm duyệt <br> 1: là admin hệ thống</p>
+
+                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
@@ -27,7 +37,7 @@
                                             <td>{{ $a->email }}</td>
                                             <td align="center">{{ $a->phanquyen }}</td>
                                             <td>
-                                                <a href="{{ url('admin/inforID') }}/{{ $a->maadmin }}">Chỉnh sửa</a>
+                                                <a href="{{ route('admin.inforID', $a->maadmin) }}">Chỉnh sửa</a>
                                             </td>
                                         </tr>
                                     @endforeach

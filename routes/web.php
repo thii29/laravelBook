@@ -36,7 +36,7 @@ Route::group(['prefix'=>'admin'],function(){
     //thong tin admin
     Route::get('informad/{email}','AdminController@show')->name('admin.inform');
     Route::put('editinfor','AdminController@editinfor')->name('admin.editinform');
-    Route::get('inforID','AdminController@show_ID')->name('admin.inforID');
+    Route::get('inforID/{id}','AdminController@show_ID')->name('admin.inforID');
     //password
     Route::get('pass','AdminController@password')->name('admin.password');
     //danhmuc
@@ -91,6 +91,7 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('checkdk','KhachhangController@register')->name('user.dangky');
     //thong tin kh
     Route::get('inform/{email}','KhachhangController@show')->name('user.infor');
+    Route::put('editinfor','KhachhangController@update')->name('user.editinfor');
     //view
     Route::get('shop','KhachhangController@indexShop')->name('user.shop');
     //chitietsach
@@ -104,6 +105,8 @@ Route::group(['prefix'=>'user'],function(){
     Route::post('dathang','DonhangController@store')->name('user.dathang');
     //lienlac
     Route::get('contact','KhachhangController@contact')->name('user.contact');
+    //ls don hang
+    Route::get('history/{id}','KhachhangController@historyDonhang')->name('user.history');
 
 });
 

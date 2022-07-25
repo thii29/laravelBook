@@ -27,7 +27,9 @@
                     <form>
                        @foreach ($nxb as $n)
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <label  for="">Nhà xuất bản {{ $n->tennxb }}</label>
+                            <label  for="">
+                                <a href="">Nhà xuất bản {{ $n->tennxb }}</a>
+                            </label>
                             <span class="badge border font-weight-normal">{{ count($n->sach) }}</span>
                         </div>
                        @endforeach
@@ -38,9 +40,13 @@
                 <div class="mb-5">
                     <h5 class="font-weight-semi-bold mb-4">Tác giả</h5>
                     <form>
+                        @foreach ($tacgia as $tg)
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-
+                            <label  for="">
+                                <a href="">{{ $tg->tentg }}</a>
+                            </label>
                         </div>
+                        @endforeach
                     </form>
                 </div>
                 <!-- Size End -->

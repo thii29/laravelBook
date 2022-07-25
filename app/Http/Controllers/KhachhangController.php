@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\chitietdonhang;
 use DB;
 use App\Models\danhmuc;
+use App\Models\donhang;
 use App\Models\sach;
 use App\Models\khachhang;
 use App\Models\nhaxuatban;
+use App\Models\tacgia;
 use Illuminate\Http\Request;
 class KhachhangController extends Controller
 {
@@ -19,10 +23,11 @@ class KhachhangController extends Controller
         $danhmuc=danhmuc::getData();
         $sach=sach::paginate(9);
         $nxb=nhaxuatban::all();
+        $tacgia = tacgia::all();
         if($key = request()->key){
             $sach=sach::where('tensach','like','%'.$key.'%')->paginate(9);
         }
-        return view('user.shop',['danhmuc'=>$danhmuc,'sach'=>$sach,'nxb'=>$nxb]);
+        return view('user.shop',['danhmuc'=>$danhmuc,'sach'=>$sach,'nxb'=>$nxb,'tacgia'=>$tacgia]);
     }
 
     public function formlogin(){
@@ -102,10 +107,22 @@ class KhachhangController extends Controller
         $kh = khachhang::khachhang();
         return view('admin.danhsachkhachhang',compact('kh'));
     }
-
-    public function update(Request $request, khachhang $khachhang)
+    public function historyDonhang($id){
+        $donhang = donhang::where('makh',$id)->get();
+        $chitiet = chitietdonhang::all();
+        return view('user.lichsudonhang',compact('donhang','chitiet'));
+    }
+    public function update(Request $request)
     {
-        //
+        $kh = khachhang::find($request->makh);
+        $kh->hoten = $request->hoten;
+        $kh->diachi = $request->diachi;
+        $kh->sdt = $request->sdt;
+        $kh->password = $request->password;
+        $kh->save();
+        session()->forget('login');
+        //dd($khachhang);
+        return redirect()->route('user.loginform')->with('noti','Thay đổi thông tin thành công, hãy đăng nhập lại!');
     }
     public function destroy(khachhang $khachhang)
     {
