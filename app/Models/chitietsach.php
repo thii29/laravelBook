@@ -17,9 +17,10 @@ class chitietsach extends Model
     public function tacgia(){
         return $this->belongsTo(tacgia::class,'matg','matg');
     }
-    // public function sach(){
-    //     return $this->belongsTo(sach::class,'masach','masach');
-    // }
+
+     public function sach(){
+         return $this->belongsTo(sach::class,'masach','masach');
+    }
     public function getChitiet(){
         return DB::table('chitietsach')->get();
     }

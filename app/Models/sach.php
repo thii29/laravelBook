@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use DB;
+use App\Models\danhmuc;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +19,7 @@ class sach extends Model
     public $timestamps= false;
 
     public function danhmuc(){
-        return $this->belongsTo(danhmuc::class,'madm','madm');
+        return $this->belongsTo(danhmuc::class,'madm','madm')->withTimestamps();
     }
 
     public function nhaxb(){
@@ -26,7 +27,7 @@ class sach extends Model
     }
 
     public function chitietsach(){
-        return $this->belongsTo(chitietsach::class,'masach','masach');
+        return $this->hasMany(chitietsach::class,'masach','masach');
     }
 
     // public function chitietsach(){

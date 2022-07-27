@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\chitietdonhang;
+use App\Models\chitietsach;
 use DB;
 use App\Models\danhmuc;
 use App\Models\donhang;
@@ -10,6 +11,7 @@ use App\Models\sach;
 use App\Models\khachhang;
 use App\Models\nhaxuatban;
 use App\Models\tacgia;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 class KhachhangController extends Controller
 {
@@ -24,12 +26,30 @@ class KhachhangController extends Controller
         $sach=sach::paginate(9);
         $nxb=nhaxuatban::all();
         $tacgia = tacgia::all();
-        if($key = request()->key){
-            $sach=sach::where('tensach','like','%'.$key.'%')->paginate(9);
-        }
         return view('user.shop',['danhmuc'=>$danhmuc,'sach'=>$sach,'nxb'=>$nxb,'tacgia'=>$tacgia]);
     }
 
+    public function find(){
+        $danhmuc=danhmuc::getData();
+        $nxb=nhaxuatban::all();
+        $tacgia = tacgia::all();
+        chitietsach::all();
+        $key = request()->input('key');
+        if($key){
+            $sach=sach::where('tensach','like','%'.$key.'%')->paginate(9);
+            //  $sach=DB::table('sach')->select('sach.*')
+            //         ->join('chitietsach','sach.msach','=','chitietsach.masach')
+            //         ->where(function (Builder $query){
+            //     return $query->where('tensach','like','%{ $key }%')
+            //                 ->orWhere('tentg','like','%{ $key }%')->get();
+            //  })
+            //  ->paginate(9);
+            $tentg=chitietsach::where('tentg','like','%'.$key.'%')->paginate(9);
+
+             return view('user.findshop',['danhmuc'=>$danhmuc,'sach'=>$sach,'tentg'=>$tentg,
+                                            'nxb'=>$nxb,'tacgia'=>$tacgia]);
+        }
+    }
     public function formlogin(){
         $danhmuc=danhmuc::getData();
         return view('user.login',['danhmuc'=>$danhmuc]);

@@ -93,11 +93,11 @@
                                         <lable>Trạng thái:</lable>
                                         <select name="trangthai" class="form-control">
                                             @if($d->trangthai == 0)
-                                                <option name="trangthai">1</option>
-                                                <option name="trangthai" selected>{{ $d->trangthai }}</option>
+                                                <option name="trangthai" value="1">Đã duyệt</option>
+                                                <option name="trangthai" value="{{ $d->trangthai }}"selected>Chưa duyệt</option>
                                             @else
-                                                <option name="trangthai">0</option>
-                                                <option name="trangthai" selected>{{ $d->trangthai }}</option>
+                                                 <option name="trangthai" value="0">Chưa duyệt</option>
+                                                 <option name="trangthai" value="{{ $d->trangthai }}"selected>Đã duyệt</option>
                                             @endif
                                         </select>
                                     </div>

@@ -37,12 +37,18 @@
                                             <td align="center">{{ $dm->trangthai }}</td>
                                             <td align="right"><a href="{{route('admin.formsuadm',$dm->madm)}}">Sửa</a></td>
                                             <td align="left">
+                                                @if(count($dm->sach)!=0)
+                                                --
+                                                @else
                                                 <form action="{{route('admin.xoadm')}}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="madm" value="{{$dm->madm}}">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="submit" value="Xóa">
                                                 </form>
+                                                @endif
+
+
                                             </td>
                                         </tr>
                                         @endforeach

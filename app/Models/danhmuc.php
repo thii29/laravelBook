@@ -5,6 +5,7 @@ namespace App\Models;
 use Facade\Ignition\Tabs\Tab;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\sach;
 use DB;
 class danhmuc extends Model
 {

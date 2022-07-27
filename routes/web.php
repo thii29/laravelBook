@@ -107,6 +107,8 @@ Route::group(['prefix'=>'user'],function(){
     Route::get('contact','KhachhangController@contact')->name('user.contact');
     //ls don hang
     Route::get('history/{id}','KhachhangController@historyDonhang')->name('user.history');
+    //timkiem
+    Route::get('find','KhachhangController@find')->name('user.find');
 
 });
 

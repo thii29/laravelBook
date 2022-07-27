@@ -12,7 +12,7 @@ class DanhmucController extends Controller
 
     public function index()
     {
-        $danhmuc=danhmuc::getData();
+        $danhmuc=danhmuc::all();
         return view('admin.danhmuc',['danhmuc'=>$danhmuc]);
     }
 
@@ -84,6 +84,7 @@ class DanhmucController extends Controller
         $dm=danhmuc::find($request->madm);
         //dd(count($dm->sach),$request->madm);
         if(count($dm->sach)!= 0){
+            //dd(count($dm->sach));
             session()->flash('fail','Danh mục này hiện đang có sách, không thể xoá');
             return redirect()->route('admin.danhmuc');
         }

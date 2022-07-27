@@ -58,7 +58,7 @@
                 <div class="row pb-3">
                     <div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <form action="{{ route('user.find') }}" method="GET">
+                            <form action="{{ route('user.shop') }}" method="GET">
                                 <div class="input-group">
                                     <input type="text" name="key" class="form-control" placeholder="Tìm kiếm bằng tên sách">
                                     <div class="input-group-append">
@@ -88,7 +88,7 @@
                            @csrf
                             <div class="card product-item border-0 mb-4">
                                 <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                    <img class="img-fluid w-100" src="img/{{ $s->hinhanh }}" alt="" name="hinhanh">
+                                    <img class="img-fluid w-100" src="./img/{{ $s->hinhanh }}" alt="Opps!" name="hinhanh">
                                     <input type="hidden" name="masach" value="{{ $s->masach }}">
                                 </div>
                                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
@@ -105,10 +105,36 @@
                             </div>
                         </form>
                     </div>
-
                     @endif
                     @endforeach
 
+                    @foreach ($tentg as $t)
+                    @if($t->sach->trangthai==1)
+                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                        <form action="{{ route('user.addgiohang') }}" method="post" enctype="multipart/form-data">
+                           @csrf
+                            <div class="card product-item border-0 mb-4">
+                                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                    <img class="img-fluid w-100" src="./img/{{ $t->sach->hinhanh }}" alt="Opps!" name="hinhanh">
+                                    <input type="hidden" name="masach" value="{{ $t->sach->masach }}">
+                                </div>
+                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                    <h6 class="text-truncate mb-3">{{ $t->sach->tensach }}</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <h6>{{ number_format($t->sach->gia) }} VND</h6>
+                                    </div>
+                                    <input type="hidden" name="soluong" min="1" max="{{ $t->sach->soluongkho }}" value="1" >
+                                </div>
+                                <div class="card-footer d-flex justify-content-between bg-light border">
+                                    <a href="{{ url('user/detail') }}/{{ $t->sach->masach }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Chi tiết</a>
+                                    <button class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Thêm vào giỏ</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    @endif
+
+                    @endforeach
                     <div class="col-12 pb-1">
                         <nav aria-label="Page navigation">
                           <ul class="pagination justify-content-center mb-3">
