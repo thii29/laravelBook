@@ -19,7 +19,7 @@ class sach extends Model
     public $timestamps= false;
 
     public function danhmuc(){
-        return $this->belongsTo(danhmuc::class,'madm','madm')->withTimestamps();
+        return $this->belongsTo(danhmuc::class,'madm','madm');
     }
 
     public function nhaxb(){

@@ -12,14 +12,14 @@ class chitietsach extends Model
     protected $fillable=['matg','masach','tentg','tensach'];
     protected $keyType = 'string';
     public $encrementing = false;
-    public $timestamps= false;
+    public $timestamps= true;
 
     public function tacgia(){
-        return $this->belongsTo(tacgia::class,'matg','matg');
+        return $this->belongsTo(tacgia::class);
     }
 
      public function sach(){
-         return $this->belongsTo(sach::class,'masach','masach');
+         return $this->belongsToMany(sach::class,'masach','masach');
     }
     public function getChitiet(){
         return DB::table('chitietsach')->get();

@@ -82,6 +82,11 @@
                         </div>
                     </div>
                     @foreach ($sach as $s)
+                    {{-- @foreach ($tentg as $t)
+                    @php
+                        var_dump($t->masach)
+                    @endphp
+                    @if($sach->masach == $t->masach) --}}
                     @if($s->trangthai==1)
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                         <form action="{{ route('user.addgiohang') }}" method="post" enctype="multipart/form-data">
@@ -106,10 +111,11 @@
                         </form>
                     </div>
                     @endif
+                    {{-- @endif
+                    @endforeach --}}
                     @endforeach
 
-                    @foreach ($tentg as $t)
-                    @if($t->sach->trangthai==1)
+                    {{-- @foreach ($tentg as $t)
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                         <form action="{{ route('user.addgiohang') }}" method="post" enctype="multipart/form-data">
                            @csrf
@@ -132,9 +138,8 @@
                             </div>
                         </form>
                     </div>
-                    @endif
 
-                    @endforeach
+                    @endforeach --}}
                     <div class="col-12 pb-1">
                         <nav aria-label="Page navigation">
                           <ul class="pagination justify-content-center mb-3">
@@ -142,6 +147,13 @@
                           </ul>
                         </nav>
                     </div>
+                    {{-- <div class="col-12 pb-1">
+                        <nav aria-label="Page navigation">
+                          <ul class="pagination justify-content-center mb-3">
+                            {{ $tentg->links() }}
+                          </ul>
+                        </nav>
+                    </div> --}}
                 </div>
             </div>
             <!-- Shop Product End -->

@@ -1,17 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Models\chitietdonhang;
 use App\Models\chitietsach;
-use DB;
 use App\Models\danhmuc;
 use App\Models\donhang;
 use App\Models\sach;
 use App\Models\khachhang;
 use App\Models\nhaxuatban;
 use App\Models\tacgia;
-use Illuminate\Database\Eloquent\Builder;
+// use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Collection;
+
 use Illuminate\Http\Request;
 class KhachhangController extends Controller
 {
@@ -40,13 +42,12 @@ class KhachhangController extends Controller
             //  $sach=DB::table('sach')->select('sach.*')
             //         ->join('chitietsach','sach.msach','=','chitietsach.masach')
             //         ->where(function (Builder $query){
-            //     return $query->where('tensach','like','%{ $key }%')
-            //                 ->orWhere('tentg','like','%{ $key }%')->get();
+            //     return $query->where('tensach','like','%{$key}%')
+            //                 ->orWhere('tentg','like','%{$key}%')->get();
             //  })
             //  ->paginate(9);
-            $tentg=chitietsach::where('tentg','like','%'.$key.'%')->paginate(9);
-
-             return view('user.findshop',['danhmuc'=>$danhmuc,'sach'=>$sach,'tentg'=>$tentg,
+            //$tentg=chitietsach::where('tentg','like','%'.$key.'%')->paginate(9);
+             return view('user.findshop',['danhmuc'=>$danhmuc,'sach'=>$sach,
                                             'nxb'=>$nxb,'tacgia'=>$tacgia]);
         }
     }

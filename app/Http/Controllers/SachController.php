@@ -19,14 +19,17 @@ class SachController extends Controller
     public function index($id)
     {
         //chititetsach
+        $detail=sach::where('masach',$id)->get();
         $danhmuc=danhmuc::getData();
         $nxb=nhaxuatban::getDataNXB();
-        $tg=chitietsach::getChitiet();
-        $detail=sach::where('masach',$id)->get();
-        $sach=sach::getdataBook();
+        $sach=sach::all();
+        $tg=chitietsach::where('masach',$id)->get();
+        $tacgia = tacgia::all();
+        // dd($tg);
         //dd($detail);
         return view('user.detail',['danhmuc'=>$danhmuc,
-                                  'detail'=>$detail,'nxb'=>$nxb,'tg'=>$tg,'sach'=>$sach]);
+                                  'detail'=>$detail,'nxb'=>$nxb,
+                                    'tg'=>$tg,'sach'=>$sach,'tacgia'=>$tacgia]);
     }
 
     /**

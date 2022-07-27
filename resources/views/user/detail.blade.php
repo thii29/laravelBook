@@ -40,7 +40,11 @@
                 <p class="mb-4">Nhà xuất bản:
                     {{ $d->nhaxb->tennxb }}
                 </p>
-                <p class="mb-4">Tác giả: {{ $d->chitietsach->tentg }}</p>
+                @foreach ($tg as $t)
+                @if($d->masach == $t->masach)
+                <p class="mb-4">Tác giả: {{ $t->tentg }}</p>
+                @endif
+                @endforeach ()
                 <p class="mb-4">Thể loại: {{ $d->danhmuc->tendm }}</p>
                 <p class="mb-4">Số trang: {{ $d->sotrang }}</p>
                 <p class="mb-4">Kích thước: {{ $d->kichthuoc }}</p>
