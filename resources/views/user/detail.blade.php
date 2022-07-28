@@ -54,6 +54,8 @@
                 @else
                     <p class="mb-4">Tình trạng: hết hàng </p>
                 @endif
+                <p class="mb-4">Số lượng: {{ $d->soluongkho }} </p>
+
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         {{-- <div class="input-group-btn">

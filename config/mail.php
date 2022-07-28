@@ -40,7 +40,7 @@ return [
             'port' => 587,/*env('MAIL_PORT', 587)*/
             'encryption' => env('MAIL_ENCRYPTION', ''),/*env('MAIL_ENCRYPTION', 'tls')*/
             'username' => 'thiphamlaravel@gmail.com',/*env('MAIL_USERNAME')*/
-            'password' => 'Abc@123456',/*env('MAIL_PASSWORD')*/
+            'password' => 'xbbqedbpvgfddajb',/*env('MAIL_PASSWORD')*/
             'timeout' => null,
             'auth_mode' => null,
         ],
