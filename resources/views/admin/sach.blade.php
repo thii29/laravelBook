@@ -43,7 +43,7 @@
                                 <td>Mã nhà xuất bản</td>
                                 <td>Hình ảnh</td>
                                 <td>Số lượng kho</td>
-                                <td>Thao tác</td>
+                                <td colspan="2">Thao tác</td>
                             </td>
                         </thead>
                         {{-- Thêm code hiển thị ở đây --}}
@@ -56,7 +56,15 @@
                                 <td><img src="../user/img/{{ $s->hinhanh }}" alt="Lỗi hình rồi!" style="width: 50px"></td>
                                 <td align="center">{{ $s->soluongkho }}</td>
                                 <td>
-                                    <a href="{{route('admin.formsuasach',$s->masach)}}">Sửa</a>
+                                    <a href="{{route('admin.formsuasach',$s->masach)}}" class="btn btn-primary">Sửa </a>
+                                </td>
+                                <td>
+                                    <form action="{{ route('admin.xoasach') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="masach" value="{{ $s->masach }}">
+                                        <button class="btn btn-primary"> Xoá</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

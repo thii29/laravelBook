@@ -47,15 +47,19 @@
                                             <td>{{ $dh->makm }}</td>
                                             <td>{{ $dh->tongtien }}</td>
                                             <td>{{ $dh->ghichu }}</td>
-                                            <td>{{ $dh->trangthai }}</td>
+                                            <td>
+                                                @if($dh->trangthai == 1)
+                                                    Đã duyệt
+                                                @else
+                                                    Chưa duyệt
+                                                @endif
+                                            </td>
                                             <td>
                                                <a href="{{ route('admin.chitietdh',$dh->mahoadon) }}">Duyệt</a>
                                             </td>
                                     </tr>
                                    @endforeach
-                                    <tbody>
-
-                                    </tbody>
+                                   
                                 </table>
                             </div>
                         </div>

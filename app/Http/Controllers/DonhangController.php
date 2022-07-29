@@ -7,6 +7,7 @@ use App\Models\donhang;
 use App\Models\chitietdonhang;
 use App\Models\danhmuc;
 use App\Models\khuyenmai;
+use App\Models\sach;
 use Illuminate\Http\Request;
 
 class DonhangController extends Controller
@@ -62,6 +63,9 @@ class DonhangController extends Controller
             $chitiet['soluongmua'] = $carts->qty;
             $chitiet['tongtiensp'] = $carts->price*$carts->qty;
             chitietdonhang::insert($chitiet);
+            $sach = sach::find($carts->id);
+            $sach->soluongkho=($sach->soluongkho)-($carts->qty);
+            $sach->update();
         }
         //dd($donhang, $chitiet);
 

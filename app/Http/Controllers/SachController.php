@@ -9,6 +9,8 @@ use App\Models\chitietsach;
 use App\Models\tacgia;
 use Illuminate\Http\Request;
 
+use function PHPSTORM_META\map;
+
 class SachController extends Controller
 {
     /**
@@ -92,7 +94,7 @@ class SachController extends Controller
         ];
         //dd($data);
         sach::create($data);
-        chitietsach::create($detaildata);
+        chitietsach::insert($detaildata);
         return redirect()->route('admin.sach');
     }
 
@@ -119,9 +121,18 @@ class SachController extends Controller
         //
     }
 
-    public function destroy(sach $sach)
+    public function destroy()
     {
         //
-
+        // $chitiet=chitietsach::where('masach',request()->masach)->get();
+        // DB::table('chitietsach')->delete($chitiet);
+        $sach = sach::find(request()->masach);
+        if($sach->soluongkho != 0){
+            session()->flash('fail','Số lượng sách lớn hơn 0');
+            return back();
+        }
+        sach::find(request()->masach)->delete();
+        session()->flash('success','Xoá thành công');
+        return redirect()->route('admin.sach');
     }
 }
