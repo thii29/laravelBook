@@ -14,7 +14,7 @@
                  </ul>
              </div>
              @endif
-             
+
             <div class="card mb-4">
                     @foreach ($admin as $ad)
                     <form action="{{ route('admin.editinform') }}" class="form-control" method="POST">
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="">Phân quyền: </label>
-                            <input type="number"  class="form-control" name="phanquyen" id="" value="{{ $ad->phanquyen }}" min="0" max="1" >
+                            <input type="number"  class="form-control" name="phanquyen" id="" value="{{ $ad->phanquyen }}" min="0" max="2" >
                         </div>
                     </div>
                     <div class="row mb-3">

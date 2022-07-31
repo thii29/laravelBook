@@ -27,11 +27,11 @@ class SachController extends Controller
         $sach=sach::all();
         $tg=chitietsach::where('masach',$id)->get();
         $tacgia = tacgia::all();
-        // dd($tg);
+        //dd($tg);
         //dd($detail);
         return view('user.detail',['danhmuc'=>$danhmuc,
-                                  'detail'=>$detail,'nxb'=>$nxb,
-                                    'tg'=>$tg,'sach'=>$sach,'tacgia'=>$tacgia]);
+                                'detail'=>$detail,'nxb'=>$nxb,
+                                'tg'=>$tg,'sach'=>$sach,'tacgia'=>$tacgia]);
     }
 
     /**
@@ -110,15 +110,44 @@ class SachController extends Controller
     }
 
 
-    public function edit(sach $masach)
+    public function edit($masach)
     {
-        $book=sach::where('masach',$masach)->get();
-        dd($book);
+        $book = sach::find($masach);
+        $danhmuc = danhmuc::all();
+        $nxb = nhaxuatban::all();
+        $chitiet=chitietsach::all();
+        //dd($book, $chitiet);
+        return view('admin.suathongtinsach',compact('book','danhmuc','nxb','chitiet'));
     }
 
-    public function update(Request $request, sach $sach)
+    public function update()
     {
-        //
+        $tenhinh = request()->file('hinhanh')->getClientOriginalName();
+        request()->hinhanh->move(public_path('user/img'),$tenhinh);
+        $book = [
+            'masach'=>request()->masach,
+            'tensach'=>request()->tensach,
+            'madm'=>request()->madm,
+            'manxb'=>request()->manxb,
+            'hinhanh'=>$tenhinh,
+            'soluongkho'=>request()->soluongkho,
+            'sotrang'=>request()->sotrang,
+            'kichthuoc'=>request()->kichthuoc,
+            'loaibia'=>request()->loaibia,
+            'gioithieusach'=>request()->gioithieu,
+            'gia'=>request()->gia,
+            'banchay'=>request()->banchay,
+            'trangthai'=>request()->trangthai,
+        ];
+        $chitiet = [
+            'matg'=>request()->matg,
+            'tentg'=>request()->tentg,
+            'masach'=>request()->masach,
+            'tensach'=>request()->tensach,
+        ];
+        sach::updated($book);
+        chitietsach::updated($chitiet);
+        return redirect()->route('admin.sach')->with('success','Sửa thành công');
     }
 
     public function destroy()

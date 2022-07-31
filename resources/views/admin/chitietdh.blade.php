@@ -91,23 +91,36 @@
                                     </div>
                                     <div class="col-md-4">
                                         <lable>Trạng thái:</lable>
+                                        @if(session('dangnhap')["phanquyen"]==1 || session('dangnhap')["phanquyen"]==0)
                                         <select name="trangthai" class="form-control">
-                                            @if($d->trangthai == 0)
+                                                @if($d->trangthai == 0)
                                                 <option name="trangthai" value="1">Đã duyệt</option>
                                                 <option name="trangthai" value="{{ $d->trangthai }}"selected>Chưa duyệt</option>
-                                            @else
+                                                 @else
                                                  <option name="trangthai" value="0">Chưa duyệt</option>
                                                  <option name="trangthai" value="{{ $d->trangthai }}"selected>Đã duyệt</option>
-                                            @endif
+                                                 @endif
                                         </select>
+                                        @else
+                                            @if($d->trangthai == 0)
+                                                <input type="text" name="" value="Chưa duyệt" id="" class="form-control" readonly>
+                                            @else
+                                                <input type="text" name="" value="Đã duyệt" id="" class="form-control" readonly>
+                                            @endif
+                                        @endif
+
                                     </div>
                                 </div>
                                 <br>
                                 <hr>
                                 <div class="row" >
                                     &nbsp;&nbsp;
-                                    <button class="btn btn-primary col-md-2">Duyệt</button> &nbsp;
-                                    <a name="" id="" class="btn btn-primary col-md-2" href="#" role="button">Huỷ</a>
+                                    @if (session('dangnhap')["phanquyen"]==1 || session('dangnhap')["phanquyen"]==0)
+                                        <button class="btn btn-primary col-md-2">Duyệt</button> &nbsp;
+                                    @else
+                                        <a href="{{ route('admin.dsdonhang') }}">Quay về danh sách đơn hàng</a>
+                                    @endif
+                                    {{-- <a name="" id="" class="btn btn-primary col-md-2" href="#" role="button">Huỷ</a> --}}
                                 </div>
                             </div>
                         </div>

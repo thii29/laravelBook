@@ -70,7 +70,8 @@ Route::group(['prefix'=>'admin'],function(){
     Route::get('sach','SachController@show')->name('admin.sach');
     Route::get('formthemsach','SachController@create')->name('admin.formthemsach');
     Route::post('themsach','SachController@store')->name('admin.themsach');
-    Route::get('formsuasach/{$masach}','SachController@edit')->name('admin.formsuasach');
+    Route::get('formsuasach/{masach}','SachController@edit')->name('admin.formsuasach');
+    Route::put('suasach','SachController@update')->name('admin.suasach');
     Route::delete('xoasach','SachController@destroy')->name('admin.xoasach');
     //donhang
     Route::get('dsdonhang','DonhangController@show')->name('admin.dsdonhang');
@@ -78,6 +79,8 @@ Route::group(['prefix'=>'admin'],function(){
     Route::put('duyetdon','DonhangController@update')->name('admin.duyet');
     //khachhang - của admin
     Route::get('dskh','KhachhangController@listKhachHang')->name('admin.dskh');
+    //thong ke
+    Route::get('thongke','AdminController@doanhthu')->name('admin.doanhthu');
 });
 
 

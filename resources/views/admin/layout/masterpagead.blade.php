@@ -17,7 +17,7 @@
             <a class="navbar-brand ps-3" href="{{ route('admin.showindex') }}">Admin</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-           
+
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="{{ route('admin.loginform') }}"
@@ -46,6 +46,76 @@
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
+                        @if (session()->has('dangnhap'))
+                            @if(session('dangnhap')["phanquyen"] == 1)
+                            <div class="nav">
+                                <a class="nav-link" href="{{ route('admin.showindex') }}">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                    Quản lý
+                                </a>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                    Danh mục
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="{{ route('admin.danhmuc') }}">Bảng danh mục</a>
+                                        <a class="nav-link" href="{{ route('admin.formthem') }}">Thêm danh mục</a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                    Sách
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="{{ route('admin.sach') }}">Bảng sách</a>
+                                        <a class="nav-link" href="{{ route('admin.formthemsach') }}">Thêm sách</a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseNXB" aria-expanded="false" aria-controls="collapsePages">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                    Nhà xuất bản
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseNXB" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="{{ route('admin.nxb') }}">Danh sách NXB</a>
+                                        <a class="nav-link" href="{{ route('admin.formthemnxb') }}">Thêm nhà xuất bản</a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAuthor" aria-expanded="false" aria-controls="collapsePages">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                    Tác giả
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseAuthor" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="{{ route('admin.tg') }}">Danh sách tác giả</a>
+                                        <a class="nav-link" href="{{ route('admin.formthemtg') }}">Thêm tác giả</a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link" href="{{ route('admin.dsdonhang') }}">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                    Đơn hàng
+                                </a>
+                                <a class="nav-link" href="{{ route('admin.doanhthu') }}">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                    Thống kê
+                                </a>
+                                <a class="nav-link" href="{{ route('admin.dskh') }}">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    Khách Hàng
+                                </a>
+                                <a class="nav-link" href="{{ route('admin.km') }}">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                    Khuyến mãi
+                                </a>
+                            </div>
+                        </div>
+                        @elseif(session('dangnhap')["phanquyen"]==2)
                         <div class="nav">
                             <a class="nav-link" href="{{ route('admin.showindex') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -99,7 +169,11 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Đơn hàng
                             </a>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('admin.dsdonhang') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Thống kê
+                            </a>
+                            <a class="nav-link" href="{{ route('admin.dskh') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Khách Hàng
                             </a>
@@ -109,6 +183,26 @@
                             </a>
                         </div>
                     </div>
+                        @else
+                        <div class="nav">
+                            <a class="nav-link" href="{{ route('admin.dsdonhang') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Đơn hàng
+                            </a>
+                            <a class="nav-link" href="{{ route('admin.doanhthu') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Thống kê
+                            </a>
+                            <a class="nav-link" href="{{ route('admin.dskh') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Khách Hàng
+                            </a>
+                        </div>
+                        @endif
+                        @else
+                           <p>&nbsp; Hãy <a href="{{  route('admin.loginform') }}">đăng nhập </a></p>
+                        @endif
+
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:
                         @if (session()->has('dangnhap'))

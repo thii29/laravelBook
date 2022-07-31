@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use DB;
 use App\Models\admin;
+use App\Models\donhang;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -84,11 +85,11 @@ class AdminController extends Controller
         return view('admin.informad',['admin'=>$admin]);
     }
     // admin kt và chỉnh sửa tk của admin khác
-    public function show_ID(admin $id){
-        if (session('dangnhap')["phanquyen"] == 0) {
-            return redirect()->back()->with('error','Không có quyền hạn truy cập!');
-        }
-        $admin = admin::find($id);
+    public function show_ID($id){
+        // if (session('dangnhap')["phanquyen"] == 0) {
+        //     return redirect()->back()->with('error','Không có quyền hạn truy cập!');
+        // }
+        $admin = admin::where('maadmin',$id)->get();
         //dd($admin);
         return view('admin.qladmin',['admin'=>$admin]);
     }
@@ -109,7 +110,18 @@ class AdminController extends Controller
         $admin->save();
         return redirect()->route('admin.showindex');
     }
-    public function password(){
-        return view('admin.password');
+
+    public function doanhthu(){
+        $dulieu = [];
+        for($i=1; $i<=12; $i++){
+            $sum = 0;
+            $thang = json_decode(json_encode(donhang::where('trangthai',1)->whereMonth('ngaytao',$i)
+                                ->get('tongtien')),true);
+            foreach($thang as $t){
+                $sum = $sum +$t['tongtien'];
+            }
+            $dulieu[] = $sum;
+        }
+        return view('admin.doanhthu', compact('dulieu'));
     }
 }

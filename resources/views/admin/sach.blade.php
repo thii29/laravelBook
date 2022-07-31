@@ -56,7 +56,7 @@
                                 <td><img src="../user/img/{{ $s->hinhanh }}" alt="Lỗi hình rồi!" style="width: 50px"></td>
                                 <td align="center">{{ $s->soluongkho }}</td>
                                 <td>
-                                    <a href="{{route('admin.formsuasach',$s->masach)}}" class="btn btn-primary">Sửa </a>
+                                    <a href="{{ route('admin.formsuasach',$s->masach) }}" class="btn btn-primary">Sửa </a>
                                 </td>
                                 <td>
                                     <form action="{{ route('admin.xoasach') }}" method="POST">
@@ -71,8 +71,6 @@
                     </table>
                 </div>
             </div>
-
-
             <div style="height: 100vh"></div>
         </div>
     </main>

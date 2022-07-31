@@ -106,13 +106,23 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <lable>Mã tác giả: </lable>
-                                            <input type="text" name="matg" id="" class="form-control">
+                                            <select name="matg" id="" class="form-control">
+                                                @foreach ($tacgia as $t)
+                                                <option value="{{ $t->matg }}">{{ $t->matg }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-md-6">
                                             <lable>Tên tác giả: </lable>
-                                            <input type="text" name="tentg" id="" class="form-control">
+                                            <select name="tentg" id="" class="form-control">
+                                                @foreach ($tacgia as $t)
+                                                <option value="{{ $t->tentg}}">{{ $t->matg }} - {{ $t->tentg }}</option>
+                                                @endforeach
+                                            </select>
+
                                         </div>
                                     </div>
+
                                     <br>
                                     <div class="row">
                                         <div class="col-md-12"><a href="{{ route('admin.tg') }}" target="_blank">Xem danh sách tác giả tại đây</a></div>

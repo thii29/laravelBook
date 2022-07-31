@@ -55,11 +55,10 @@
                                                 @endif
                                             </td>
                                             <td>
-                                               <a href="{{ route('admin.chitietdh',$dh->mahoadon) }}">Duyệt</a>
+                                               <a href="{{ route('admin.chitietdh',$dh->mahoadon) }}">Xem</a>
                                             </td>
                                     </tr>
                                    @endforeach
-                                   
                                 </table>
                             </div>
                         </div>

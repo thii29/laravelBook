@@ -21,21 +21,28 @@
                                 <table class="table table-light">
                                     <tbody >
                                         <tr>
-                                            <td>Mã danh mục</td>
-                                            <td>Tên danh mục</td>
-                                            <td align="center">Trạng thái</td>
-                                            <td colspan="2" align="center">Thao tác</td>
+                                            <td>Mã KH</td>
+                                            <td>Họ tên KH</td>
+                                            <td Email</td>
+                                            <td>Số điện thoại</td>
+                                            <td>Địa chỉ</td>
                                         </tr>
                                     </tbody>
                                     {{-- Thêm code hiển thị ở đây --}}
                                     <tbody>
-
+                                        @foreach ($kh as $k)
+                                        <tr>
+                                            <td>{{ $k->makh }}</td>
+                                            <td>{{ $k->hoten }}</td>
+                                            <td>{{ $k->email }}</td>
+                                            <td>{{ $k->sdt }}</td>
+                                            <td>{{ $k->diachi }}</td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-
-
                         <div style="height: 100vh"></div>
                     </div>
                 </main>
