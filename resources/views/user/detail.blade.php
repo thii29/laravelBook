@@ -44,7 +44,7 @@
                 @if($d->masach == $t->masach)
                 <p class="mb-4">Tác giả: {{ $t->tentg }}</p>
                 @endif
-                @endforeach ()
+                @endforeach
                 <p class="mb-4">Thể loại: {{ $d->danhmuc->tendm }}</p>
                 <p class="mb-4">Số trang: {{ $d->sotrang }}</p>
                 <p class="mb-4">Kích thước: {{ $d->kichthuoc }}</p>
@@ -55,6 +55,7 @@
                     <p class="mb-4">Tình trạng: hết hàng </p>
                 @endif
                 <p class="mb-4">Số lượng: {{ $d->soluongkho }} </p>
+                <p class="mb-4">{{ $d->gioithieusach }}</p>
 
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
@@ -72,81 +73,14 @@
                     </div>
                     <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào giỏ</button>
                 </div>
-                <d
             </div>
         </div>
-        <div class="row px-xl-5">
-            <div class="col">
-                <div class="nav nav-tabs justify-content-center border-secondary mb-4">
-                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Mô tả</a>
-                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Nhận xét & đánh giá</a>
-                </div>
-                <div class="tab-content">
-                    <div class="tab-pane fade show active" id="tab-pane-1">
-                        <h4 class="mb-3">Mô tả - sơ lược</h4>
-                        <p>{{ $d->gioithieusach }}</p>
-                    </div>
-                            @endforeach
 
-                    <div class="tab-pane fade" id="tab-pane-3">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="mb-4">1 review for "Colorful Stylish Shirt"</h4>
-                                <div class="media mb-4">
-                                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                    <div class="media-body">
-                                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                        <div class="text-primary mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <h4 class="mb-4">Nhận xét & đánh giá</h4>
-                                <small>Your email address will not be published. Required fields are marked *</small>
-                                <div class="d-flex my-3">
-                                    <p class="mb-0 mr-2">Your Rating * :</p>
-                                    <div class="text-primary">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                </div>
-                                <form>
-                                    <div class="form-group">
-                                        <label for="message">Your Review *</label>
-                                        <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Your Name *</label>
-                                        <input type="text" class="form-control" id="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Your Email *</label>
-                                        <input type="email" class="form-control" id="email">
-                                    </div>
-                                    <div class="form-group mb-0">
-                                        <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
+
     </div>
     <!-- Shop Detail End -->
-
-
+    
     <!-- Products Start -->
     <div class="container-fluid py-5">
         <div class="text-center mb-4">

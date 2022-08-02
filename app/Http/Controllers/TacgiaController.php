@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\tacgia;
 use App\Models\chitietsach;
+use App\Models\sach;
+use App\Models\danhmuc;
+use App\Models\nhaxuatban;
 use Illuminate\Http\Request;
 
 class TacgiaController extends Controller
@@ -59,6 +62,14 @@ class TacgiaController extends Controller
         //
     }
 
+    public function showlistBook3($matg){
+        $danhmuc = danhmuc::all();
+        $nxb = nhaxuatban::all();
+        $tacgia = tacgia::all();
+        $sach = chitietsach::where('matg',$matg)->paginate(9);
+        //dd($sach);
+        return view('user.loctacgia', compact('danhmuc','sach','nxb','tacgia'));
+    }
     public function update(Request $request )
     {
         //luu thong tin chinh sua

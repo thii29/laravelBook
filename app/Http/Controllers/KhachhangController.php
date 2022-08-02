@@ -32,25 +32,15 @@ class KhachhangController extends Controller
     }
 
     public function find(){
-        $danhmuc=danhmuc::getData();
+        $danhmuc=danhmuc::all();
         $nxb=nhaxuatban::all();
         $tacgia = tacgia::all();
-        $sach = sach::All();
-        chitietsach::all();
+        //chitietsach::all();
         $kw = request()->input('key').' ';
         $key='%'.$kw.'%';
         //dd($key);
         if($key){
-            $sach=DB::table('sach')->where('tensach','like',$key)->paginate(9);
-            //  $sach=DB::table('sach')->select('sach.*')
-            //         ->join('chitietsach','sach.msach','=','chitietsach.masach')
-            //         ->where(function (Builder $query){
-            //     return $query->where('tensach','like','%{$key}%')
-            //                 ->orWhere('tentg','like','%{$key}%')->get();
-            //  })
-            //  ->paginate(9);
-            //$tentg=chitietsach::where('tentg','like','%'.$key.'%')->paginate(9);
-            //dd($sach);
+            $sach=sach::where('tensach','like',$key)->paginate(9);
         }
         return view('user.findshop',['danhmuc'=>$danhmuc,'sach'=>$sach,
                     'nxb'=>$nxb,'tacgia'=>$tacgia]);

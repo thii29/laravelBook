@@ -68,46 +68,43 @@
                                     </div>
                                 </div>
                             </form>
-                            {{-- <div class="dropdown ml-4">
-                                <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                            Sort by
-                                        </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                    <a class="dropdown-item" href="#">Latest</a>
-                                    <a class="dropdown-item" href="#">Popularity</a>
-                                    <a class="dropdown-item" href="#">Best Rating</a>
-                                </div>
-                            </div> --}}
+
                         </div>
                     </div>
                     @foreach ($sach as $s)
-                    @if($s->trangthai==1)
+                    {{-- @foreach ($tentg as $t)
+                    @php
+                        var_dump($t->masach)
+                    @endphp
+                    @if($sach->masach == $t->masach) --}}
+                    @if($s->sach->trangthai == 1)
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                         <form action="{{ route('user.addgiohang') }}" method="post" enctype="multipart/form-data">
                            @csrf
                             <div class="card product-item border-0 mb-4">
                                 <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                    <img class="img-fluid w-100" src="img/{{ $s->hinhanh }}" alt="" name="hinhanh">
-                                    <input type="hidden" name="masach" value="{{ $s->masach }}">
+                                    <img class="img-fluid w-100" src="../img/{{ $s->sach->hinhanh}}" alt="Opps!" name="hinhanh">
+                                    <input type="hidden" name="masach" value="{{ $s->sach->masach }}">
                                 </div>
                                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                    <h6 class="text-truncate mb-3">{{ $s->tensach }}</h6>
+                                    <h6 class="text-truncate mb-3">{{ $s->sach->tensach }}</h6>
                                     <div class="d-flex justify-content-center">
-                                        <h6>{{ number_format($s->gia) }} VND</h6>
+                                        <h6>{{ number_format($s->sach->gia) }} VND</h6>
                                     </div>
-                                    <input type="hidden" name="soluong" min="1" max="{{ $s->soluongkho }}" value="1" >
+                                    <input type="hidden" name="soluong" min="1" max="{{ $s->sach->soluongkho }}" value="1" >
                                 </div>
                                 <div class="card-footer d-flex justify-content-between bg-light border">
-                                    <a href="{{ url('user/detail') }}/{{ $s->masach }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Chi tiết</a>
+                                    <a href="{{ url('user/detail') }}/{{ $s->sach->masach }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Chi tiết</a>
                                     <button class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Thêm vào giỏ</button>
                                 </div>
                             </div>
                         </form>
                     </div>
-
                     @endif
+                    {{-- @endif
+                    @endforeach --}}
                     @endforeach
+
 
                     <div class="col-12 pb-1">
                         <nav aria-label="Page navigation">
@@ -116,6 +113,7 @@
                           </ul>
                         </nav>
                     </div>
+
                 </div>
             </div>
             <!-- Shop Product End -->

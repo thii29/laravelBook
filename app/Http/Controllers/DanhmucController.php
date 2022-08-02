@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\danhmuc;
-use App\Models\khuyenmai;
+use App\Models\sach;
+use App\Models\tacgia;
+use App\Models\nhaxuatban;
 use Illuminate\Http\Request;
 use DB;
 
@@ -77,6 +79,14 @@ class DanhmucController extends Controller
         return redirect()->route('admin.danhmuc');
     }
 
+    public function showListBook2($madm){
+        $danhmuc = danhmuc::all();
+        $nxb = nhaxuatban::all();
+        $tacgia = tacgia::all();
+        $sach = sach::where('madm',$madm)->paginate(9);
+        //dd($sach);
+        return view('user.loc', compact('danhmuc','sach','nxb','tacgia'));
+    }
 
     public function destroy(Request $request)
     {

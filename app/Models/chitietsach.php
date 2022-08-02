@@ -19,7 +19,7 @@ class chitietsach extends Model
     }
 
      public function sach(){
-         return $this->belongsToMany(sach::class,'masach','masach');
+         return $this->belongsTo(sach::class,'masach','masach');
     }
     public function getChitiet(){
         return DB::table('chitietsach')->get();

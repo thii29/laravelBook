@@ -28,7 +28,7 @@
                        @foreach ($nxb as $n)
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <label  for="">
-                                <a href="">Nhà xuất bản {{ $n->tennxb }}</a>
+                                <a href="{{ route('user.nxbsach',$n->manxb) }}">Nhà xuất bản {{ $n->tennxb }}</a>
                             </label>
                             <span class="badge border font-weight-normal">{{ count($n->sach) }}</span>
                         </div>
@@ -43,7 +43,7 @@
                         @foreach ($tacgia as $tg)
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <label  for="">
-                                <a href="">{{ $tg->tentg }}</a>
+                                <a href="{{ route('user.tacgiasach',$tg->matg) }}">{{ $tg->tentg }}</a>
                             </label>
                         </div>
                         @endforeach
@@ -58,7 +58,7 @@
                 <div class="row pb-3">
                     <div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <form action="{{ route('user.shop') }}" method="GET">
+                            <form action="{{ route('user.find') }}" method="GET">
                                 <div class="input-group">
                                     <input type="text" name="key" class="form-control" placeholder="Tìm kiếm bằng tên sách">
                                     <div class="input-group-append">
@@ -87,13 +87,13 @@
                         var_dump($t->masach)
                     @endphp
                     @if($sach->masach == $t->masach) --}}
-                    @if($s->trangthai==1)
+                    @if($s->trangthai == 1)
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                         <form action="{{ route('user.addgiohang') }}" method="post" enctype="multipart/form-data">
                            @csrf
                             <div class="card product-item border-0 mb-4">
                                 <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                    <img class="img-fluid w-100" src="./img/{{ $s->hinhanh }}" alt="Opps!" name="hinhanh">
+                                    <img class="img-fluid w-100" src="img/{{ $s->hinhanh }}" alt="Opps!" name="hinhanh">
                                     <input type="hidden" name="masach" value="{{ $s->masach }}">
                                 </div>
                                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">

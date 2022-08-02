@@ -113,6 +113,10 @@ Route::group(['prefix'=>'user'],function(){
     Route::get('history/{id}','KhachhangController@historyDonhang')->name('user.history');
     //timkiem
     Route::get('find','KhachhangController@find')->name('user.find');
+    //sach theo muc nxb, danh muc, tac gia
+    Route::get('nxbsach/{manxb}','NhaxuatbanController@showListBook')->name('user.nxbsach');
+    Route::get('danhmucsach/{madm}','DanhmucController@showListBook2')->name('user.danhmucsach');
+    Route::get('tacgiasach/{matg}','TacgiaController@showlistBook3')->name('user.tacgiasach');
 
 });
 

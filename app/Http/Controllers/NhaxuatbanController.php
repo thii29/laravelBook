@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\danhmuc;
+use App\Models\sach;
 use App\Models\nhaxuatban;
+use App\Models\tacgia;
 use Illuminate\Http\Request;
 
 class NhaxuatbanController extends Controller
@@ -84,7 +86,14 @@ class NhaxuatbanController extends Controller
         return redirect()->route('admin.nxb');
     }
 
-
+    public function showListBook($manxb){
+        $danhmuc = danhmuc::all();
+        $nxb = nhaxuatban::all();
+        $tacgia = tacgia::all();
+        $sach = sach::where('manxb',$manxb)->paginate(9);
+        //dd($sach);
+        return view('user.loc', compact('danhmuc','sach','nxb','tacgia'));
+    }
     public function destroy(Request $request)
     {
         //xoa

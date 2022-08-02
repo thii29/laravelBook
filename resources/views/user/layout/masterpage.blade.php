@@ -74,7 +74,7 @@
                 <div class="navbar-nav w-100 overflow-hidden hidden-1 danhmuclist">
                     @foreach ($danhmuc as $dm)
                         @if ($dm->trangthai == 1)
-                            <a href="" class="nav-item nav-link">{{ $dm->tendm }}</a>
+                            <a href="{{ route('user.danhmucsach',$dm->madm) }}" class="nav-item nav-link">{{ $dm->tendm }}</a>
                         @endif
                     @endforeach
                 </div>

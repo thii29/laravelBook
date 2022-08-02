@@ -21,6 +21,7 @@ class danhmuc extends Model
         return $this->hasMany(sach::class,'madm','madm');
     }
     public function getData(){
-        return DB::table('danhmuc')->get();
+       // return DB::table('danhmuc')->get();
+       return danhmuc::all();
     }
 }
