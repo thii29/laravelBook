@@ -25,11 +25,21 @@
     <link href="{{ asset('user/css/style.css') }}" rel="stylesheet">
     <!--Bootstrap-->
     <style>
-        .hidden-1{
-            display: none;
+        .img-banner{
+            position: relative;
+
         }
-        .open{
+        .img-banner::after{
+            position: absolute;
+            content: "BOOK STORE";
+            font-size: 50px;
+            font-style: italic;
+            font-weight: 600;
+            top: 33%;
+            left: 30%;
+            color: white;
             display: block;
+            height: 20px;
         }
     </style>
 </head>
@@ -68,28 +78,16 @@
                 <h6 class="m-0">Danh mục</h6>
                 <i class="fa fa-angle-down text-dark"></i>
             </a>
-            <nav
-                class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
+            <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
                 id="navbar-vertical">
-                <div class="navbar-nav w-100 overflow-hidden hidden-1 danhmuclist">
+                <div class="navbar-nav w-100 overflow-hidden hidden-1 ">
                     @foreach ($danhmuc as $dm)
                         @if ($dm->trangthai == 1)
                             <a href="{{ route('user.danhmucsach',$dm->madm) }}" class="nav-item nav-link">{{ $dm->tendm }}</a>
                         @endif
                     @endforeach
                 </div>
-                <script>
-                    var categoryElement = document.querySelector('.category');
-                    //console.log(categoryElement);
-                    categoryElement.onclick=function(){
-                        var x = document.querySelector('.danhmuclist');
-                        if (x.style.display === "none") {
-                          x.style.display = "block";
-                        } else {
-                          x.style.display = "none";
-                        }
-                    }
-                </script>
+
             </nav>
         </div>
         <div class="col-lg-9">

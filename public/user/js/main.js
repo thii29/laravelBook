@@ -1,6 +1,6 @@
 (function ($) {
     "use strict";
-    
+
     // Dropdown on mouse hover
     $(document).ready(function () {
         function toggleNavbarMethod() {
@@ -17,8 +17,8 @@
         toggleNavbarMethod();
         $(window).resize(toggleNavbarMethod);
     });
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
@@ -42,23 +42,22 @@
         smartSpeed: 1000,
         responsive: {
             0:{
-                items:2
+                items:1
             },
             576:{
-                items:3
+                items:2
             },
             768:{
-                items:4
+                items:3
             },
             992:{
-                items:5
+                items:4
             },
             1200:{
-                items:6
+                items:5
             }
         }
     });
-
 
     // Related carousel
     $('.related-carousel').owlCarousel({
@@ -99,6 +98,6 @@
         }
         button.parent().parent().find('input').val(newVal);
     });
-    
+
 })(jQuery);
 

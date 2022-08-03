@@ -72,15 +72,13 @@
                         </div> --}}
                     </div>
                     <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào giỏ</button>
+                    @endforeach
                 </div>
             </div>
         </div>
-
-        @endforeach
-
     </div>
     <!-- Shop Detail End -->
-    
+
     <!-- Products Start -->
     <div class="container-fluid py-5">
         <div class="text-center mb-4">
@@ -92,11 +90,11 @@
                     @foreach ($sach as $s)
                     @foreach ($detail as $de)
                     @if($s->madm == $de->madm)
-                    <form action="{{ route('user.addgiohang') }}" method="post" enctype="multipart/form-data">
-                        @csrf
                     <div class="card product-item border-0">
+                        <form action="{{ route('user.addgiohang') }}" method="post" enctype="multipart/form-data">
+                            @csrf
                         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <img class="img-fluid w-100" src="../img/{{ $s->hinhanh }}" alt="Opps! Lỗi hình mất rồi" name="hinhanh">
+                            <img class="img-fluid w-100" src="../img/{{ $s->hinhanh }}" alt="">
                         </div>
                         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                             <h6 class="text-truncate mb-3">{{ $s->tensach }}</h6>
@@ -106,21 +104,47 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="{{ url('user/detail') }}/{{ $s->masach }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Chi tiết</a>
+                            <a href="{{ url('user/detail') }}/{{ $s->masach }}" class="btn btn-sm text-dark p-0">
+                                <i class="fas fa-eye text-primary mr-1"></i>Chi tiết
+                            </a>
                             <input type="hidden" name="soluong" min="1" max="{{ $s->soluongkho }}" value="1" >
                             <button class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Thêm vào giỏ</button>
                         </div>
-                    </div>
                     </form>
+                    </div>
                     @endif
                     @endforeach
                     @endforeach
-
                 </div>
             </div>
         </div>
     </div>
+    {{-- <div class="container-fluid py-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">You May Also Like</span></h2>
+        </div>
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="owl-carousel related-carousel">
+                    <div class="card product-item border-0">
+                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="../img/sach02.jpg" alt="">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
     <!-- Products End -->
-
 
 @endsection
