@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Book Store</title>
+    <title> Book Store</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
     <link href="{{ asset('user/img/favicon.ico') }}" rel="icon">
-
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/3/3a/Book-icon-bible.png">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -158,13 +158,13 @@
                                 <div class="d-flex flex-column justify-content-start">
                                     <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Trang
                                         chủ</a>
-                                    <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Đăng
+                                    <a class="text-dark mb-2" href="{{ route('user.loginform') }}"><i class="fa fa-angle-right mr-2"></i>Đăng
                                         nhập</a>
-                                    <a class="text-dark mb-2" href="detail.html"><i class="fa fa-angle-right mr-2"></i>Đăng
+                                    <a class="text-dark mb-2" href="{{ route('user.formreg') }}"><i class="fa fa-angle-right mr-2"></i>Đăng
                                         ký</a>
-                                    <a class="text-dark mb-2" href="cart.html"><i class="fa fa-angle-right mr-2"></i>Liên
+                                    <a class="text-dark mb-2" href="{{ route('user.contact') }}"><i class="fa fa-angle-right mr-2"></i>Liên
                                         hệ</a>
-                                    <a class="text-dark mb-2" href="checkout.html"><i
+                                    <a class="text-dark mb-2" href="{{ route('user.giohang') }}"><i
                                             class="fa fa-angle-right mr-2"></i>Giỏ hàng</a>
                                 </div>
                             </div>

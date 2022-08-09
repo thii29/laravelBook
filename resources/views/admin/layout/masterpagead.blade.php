@@ -178,7 +178,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Đơn hàng
                             </a>
-                            <a class="nav-link" href="{{ route('admin.dsdonhang') }}">
+                            <a class="nav-link" href="{{ route('admin.doanhthu') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Thống kê
                             </a>
